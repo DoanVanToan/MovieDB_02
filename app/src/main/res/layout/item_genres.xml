@@ -5,7 +5,8 @@
 
         <variable
             name="itemView"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.genre.AdapterShowGenres" />
+            type="com.example.hcm_102_0006.android_project_m.ui.genre.AdapterShowGenres.GenresViewHolder" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

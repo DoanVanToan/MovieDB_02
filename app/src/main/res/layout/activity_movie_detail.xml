@@ -5,7 +5,7 @@
 
         <variable
             name="movieDetailBinding"
-            type="com.example.hcm_102_0006.android_project_m.service.model.MovieDetail" />
+            type="com.example.hcm_102_0006.android_project_m.data.model.MovieDetail" />
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,6 +15,7 @@
         android:gravity="center"
         android:orientation="vertical"
         tools:context="com.example.hcm_102_0006.android_project_m.view.ui.moviedetail.MovieDetailActivity">
+
 
         <LinearLayout
             android:layout_width="match_parent"
