@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
-            name="itemGenres"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.genre.AdapterGenres" />
+            name="genre"
+            type="com.example.hcm_102_0006.android_project_m.data.model.Genres" />
+        <variable
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel"/>
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="@{itemGenres::onResultGenre}"
-        android:orientation="vertical"
-        android:padding="@dimen/marginBetween2Item">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{itemGenres.title}"
-            android:textSize="@dimen/sizeTextHeader" />
-    </LinearLayout>
+            android:onClick="@{() -> viewModel.onItemGenreClicked(genre)}"
+            android:padding="@dimen/marginBetween2Item"
+            android:text="@{genre.name}"
+            android:textSize="@dimen/size_header" />
 </layout>

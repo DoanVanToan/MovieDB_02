@@ -2,10 +2,10 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="itemView"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.main.AdapterShowMovie" />
+            type="com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie.MyViewHolder" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

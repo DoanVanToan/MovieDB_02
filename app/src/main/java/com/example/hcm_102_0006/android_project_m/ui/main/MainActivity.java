@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.view.ui.main;
+package com.example.hcm_102_0006.android_project_m.ui.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,16 +11,16 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.service.model.Genres;
-import com.example.hcm_102_0006.android_project_m.service.model.Movie;
-import com.example.hcm_102_0006.android_project_m.service.model.Result;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
+import com.example.hcm_102_0006.android_project_m.data.model.Genres;
+import com.example.hcm_102_0006.android_project_m.data.model.Movie;
+import com.example.hcm_102_0006.android_project_m.data.model.Result;
 import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
+import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
+import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityHomeBinding;
-import com.example.hcm_102_0006.android_project_m.view.ui.genre.AdapterGenres;
+import com.example.hcm_102_0006.android_project_m.ui.genre.AdapterGenres;
+import com.example.hcm_102_0006.android_project_m.ui.genre.GenresActivity;
 
-import com.example.hcm_102_0006.android_project_m.view.ui.genre.GenresActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getInformationMovies(String category) {
-        MovieApi service = MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
+        MovieApi service = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
         service.getMovie(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getInformationMoviesGenre(String category) {
-        MovieApi service = MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
+        MovieApi service = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
         service.getMovieGenres(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -178,12 +178,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESPONSE) {
-            if (resultCode == Activity.RESULT_OK) {
-                Genres genres = (Genres) data.getSerializableExtra(AdapterGenres.KEY_RESULT);
-                getInformationMoviesGenre(String.valueOf(genres.getId()));
-            }
-        }
+//        if (requestCode == RESPONSE) {
+//            if (resultCode == Activity.RESULT_OK) {
+//                Genres genres = (Genres) data.getSerializableExtra(AdapterGenres.KEY_RESULT);
+//                getInformationMoviesGenre(String.valueOf(genres.getId()));
+//            }
+//        }
 
     }
+
+    // nam ben genreActivity a a, da
 }
