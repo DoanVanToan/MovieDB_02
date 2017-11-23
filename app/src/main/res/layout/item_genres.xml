@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="itemView"
+            type="com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowGenres.GenresViewHolder" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/marginBetween2Item">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/sizeTextHeader"
+                android:text="@{itemView.mGenresTitle}"/>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</layout>

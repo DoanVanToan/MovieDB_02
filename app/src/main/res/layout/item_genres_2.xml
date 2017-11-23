@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="itemGenres"
+            type="com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres.MyViewHolder" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{itemGenres::onResultGenre}"
+        android:orientation="vertical"
+        android:padding="@dimen/marginBetween2Item">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{itemGenres.title}"
+            android:textSize="@dimen/sizeTextHeader" />
+    </LinearLayout>
+</layout>
