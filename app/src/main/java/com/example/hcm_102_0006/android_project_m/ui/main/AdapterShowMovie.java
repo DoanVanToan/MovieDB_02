@@ -80,7 +80,7 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
 
         public void onClickMovieDetail(View view){
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
-            intent.putExtra(KEY_MOVIE,sMovies.get(getAdapterPosition()).getId());
+            intent.putExtra(KEY_MOVIE,sMovies.get(getAdapterPosition()));
             mContext.startActivityForResult(intent,KEY_DETAIL);
         }
 

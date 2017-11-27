@@ -12,5 +12,6 @@
     <string name="search">Search...</string>
     <string name="btnFind">Find</string>
     <string name="msgAllGenres">All Genres</string>
-
+    <string name="msgSaveMovie">Your favorite movie has been saved</string>
+    <string name="msgDeleteMovie">Your favorite movie has been deleted</string>
 </resources>
