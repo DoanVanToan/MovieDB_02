@@ -20,9 +20,8 @@ import java.util.List;
  */
 
 public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHolder> {
-
-    private Activity mContext;
     public static final String KEY_RESULT = "GENRES";
+    private Activity mContext;
     private List<Genres> mGenres;
 
     public AdapterGenres(Activity context, List<Genres> mGenres) {

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 
+import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.service.model.Genres;
 import com.example.hcm_102_0006.android_project_m.service.model.GenreResponse;
@@ -40,7 +41,7 @@ public class GenresActivity extends AppCompatActivity {
     public void getListGenres() {
         MovieApi service =
                 MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        service.getGenres()
+        service.getGenres(BuildConfig.MOVIE_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<GenreResponse>() {

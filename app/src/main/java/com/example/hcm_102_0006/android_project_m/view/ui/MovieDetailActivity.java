@@ -2,7 +2,6 @@ package com.example.hcm_102_0006.android_project_m.view.ui;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -12,7 +11,6 @@ import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
 import com.example.hcm_102_0006.android_project_m.service.model.Movie;
 import com.example.hcm_102_0006.android_project_m.service.model.MovieDetail;
-import com.example.hcm_102_0006.android_project_m.service.repository.DeveloperKey;
 import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
@@ -49,7 +47,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
 
     public void getInformationMovieDetail(String movieId) {
         MovieApi movieApi = MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        movieApi.getMovieDetail(movieId).subscribeOn(Schedulers.io())
+        movieApi.getMovieDetail(movieId,BuildConfig.MOVIE_KEY,"videos").subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MovieDetail>() {
                     @Override

@@ -26,8 +26,8 @@ import java.util.List;
 
 public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyViewHolder> {
 
-    public static int KEY_DETAIL = 321;
-    public static String KEY_MOVIE = "ID_MOVIE";
+    public static final int KEY_DETAIL = 321;
+    public static final String KEY_MOVIE = "ID_MOVIE";
     private static Activity mContext;
     private static List<Movie> sMovies;
     public AdapterShowMovie(Activity context, List<Movie> mMovies) {
