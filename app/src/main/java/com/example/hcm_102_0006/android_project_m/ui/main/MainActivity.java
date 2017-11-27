@@ -11,13 +11,15 @@ import android.text.TextWatcher;
 import android.view.View;
 
 import com.example.hcm_102_0006.android_project_m.R;
+
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
-import com.example.hcm_102_0006.android_project_m.data.model.Result;
+
 import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityHomeBinding;
+import com.example.hcm_102_0006.android_project_m.service.model.ResultResponse;
 import com.example.hcm_102_0006.android_project_m.ui.genre.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.ui.genre.GenresActivity;
 
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         service.getMovie(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Result>() {
+                .subscribe(new Subscriber<ResultResponse>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(ResultResponse result) {
                         mMovies.clear();
                         mMoviesAgain.clear();
                         mMovies.addAll(result.getResults());
@@ -84,7 +86,9 @@ public class MainActivity extends AppCompatActivity {
                         mMoviesAgain.addAll(mMovies);
                         int cour = 0;
                         for (Movie movie : mMovies) {
-                            mMovieDataSource.insertMovie(movie);
+                            if (!mMovieDataSource.checkFavorite(movie.getId())){
+                                //mMovieDataSource.insertMovie(movie);
+                            }
                             if (cour == 4) {
                                 break;
                             }
@@ -99,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         service.getMovieGenres(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<Result>() {
+                .subscribe(new Subscriber<ResultResponse>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(Result result) {
+                    public void onNext(ResultResponse result) {
                         mMovies.clear();
                         mMoviesAgain.clear();
                         mMovies.addAll(result.getResults());
@@ -184,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
 //                getInformationMoviesGenre(String.valueOf(genres.getId()));
 //            }
 //        }
+
 
     }
 

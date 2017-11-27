@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -28,6 +29,8 @@ public class MovieDetail extends BaseObservable implements Parcelable {
     private String mOverview;
     @SerializedName("original_title")
     private String mOriginalTitle;
+    @SerializedName("genres")
+    private List<Genres> mGenres;
 
     public MovieDetail(
             int id, String poster_path, List<Company> production_companies,
@@ -108,6 +111,14 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         this.mOriginalTitle = original_title;
     }
 
+    public List<Genres> getmGenres() {
+        return mGenres;
+    }
+
+    public void setmGenres(List<Genres> mGenres) {
+        this.mGenres = mGenres;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -151,6 +162,28 @@ public class MovieDetail extends BaseObservable implements Parcelable {
                 .load(imagePath)
                 .fitCenter()
                 .into(imageView);
+    }
+
+    public String getAllProduction() {
+        String allCompany = "Production : ";
+        for ( Company company: mProductionCompanies) {
+            allCompany += company.getName() + ", ";
+        }
+        if (allCompany.length() > 2) {
+            allCompany = allCompany.substring(0,allCompany.length()-2);
+        }
+        return allCompany;
+    }
+
+    public String getAllGenres() {
+        String genres = "Genres : ";
+        for ( Genres genre: mGenres) {
+            genres += genre.getName() +  ", ";
+        }
+        if (genres.length() > 2) {
+            genres = genres.substring(0,genres.length()-2);
+        }
+        return genres;
     }
 
 
