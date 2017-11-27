@@ -1,11 +1,11 @@
-package com.example.hcm_102_0006.android_project_m.service.model;
+package com.example.hcm_102_0006.android_project_m.remote.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.hcm_102_0006.android_project_m.data.MovieTable;
+import com.example.hcm_102_0006.android_project_m.local.MovieTable;
 import com.google.gson.annotations.SerializedName;
 
 /**

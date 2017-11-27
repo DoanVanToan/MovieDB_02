@@ -8,11 +8,11 @@ import android.widget.Toast;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
-import com.example.hcm_102_0006.android_project_m.service.model.Movie;
-import com.example.hcm_102_0006.android_project_m.service.model.MovieDetail;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
+import com.example.hcm_102_0006.android_project_m.local.MovieDataSource;
+import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
+import com.example.hcm_102_0006.android_project_m.remote.model.MovieDetail;
+import com.example.hcm_102_0006.android_project_m.remote.repository.MovieApi;
+import com.example.hcm_102_0006.android_project_m.remote.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowMovie;
 import com.google.android.youtube.player.YouTubeBaseActivity;

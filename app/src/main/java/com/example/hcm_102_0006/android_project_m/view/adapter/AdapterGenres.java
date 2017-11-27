@@ -1,6 +1,7 @@
 package com.example.hcm_102_0006.android_project_m.view.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresMovieBinding;
-import com.example.hcm_102_0006.android_project_m.service.model.Genres;
+import com.example.hcm_102_0006.android_project_m.remote.model.Genres;
 
 import java.util.List;
 
@@ -21,10 +22,10 @@ import java.util.List;
 
 public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHolder> {
     public static final String KEY_RESULT = "GENRES";
-    private Activity mContext;
+    private Context mContext;
     private List<Genres> mGenres;
 
-    public AdapterGenres(Activity context, List<Genres> mGenres) {
+    public AdapterGenres(Context context, List<Genres> mGenres) {
         this.mContext = context;
         this.mGenres = mGenres;
     }
@@ -65,8 +66,8 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
         public void onResultGenre(View view) {
             Intent intent = new Intent();
             intent.putExtra(KEY_RESULT, mGenres.get(getAdapterPosition()));
-            mContext.setResult(Activity.RESULT_OK, intent);
-            mContext.finish();
+            ((Activity)mContext).setResult(Activity.RESULT_OK, intent);
+            ((Activity)mContext).finish();
         }
 
     }

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.service.model.Genres;
+import com.example.hcm_102_0006.android_project_m.remote.model.Genres;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresBinding;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.service.model;
+package com.example.hcm_102_0006.android_project_m.remote.model;
 
 import android.content.Context;
 import android.databinding.BaseObservable;

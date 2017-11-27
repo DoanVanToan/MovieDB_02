@@ -14,7 +14,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.service.model.Movie;
+import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemMovieBinding;
 import com.example.hcm_102_0006.android_project_m.view.ui.MovieDetailActivity;
 
@@ -28,9 +28,9 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
 
     public static final int KEY_DETAIL = 321;
     public static final String KEY_MOVIE = "ID_MOVIE";
-    private static Activity mContext;
+    private static Context mContext;
     private static List<Movie> sMovies;
-    public AdapterShowMovie(Activity context, List<Movie> mMovies) {
+    public AdapterShowMovie(Context context, List<Movie> mMovies) {
         this.mContext = context;
         this.sMovies = mMovies;
     }
@@ -81,7 +81,7 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
         public void onClickMovieDetail(View view){
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
             intent.putExtra(KEY_MOVIE,sMovies.get(getAdapterPosition()));
-            mContext.startActivityForResult(intent,KEY_DETAIL);
+            ((Activity)mContext).startActivityForResult(intent,KEY_DETAIL);
         }
 
     }

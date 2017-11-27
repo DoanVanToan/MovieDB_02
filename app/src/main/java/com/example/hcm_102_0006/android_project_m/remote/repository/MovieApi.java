@@ -1,10 +1,10 @@
-package com.example.hcm_102_0006.android_project_m.service.repository;
+package com.example.hcm_102_0006.android_project_m.remote.repository;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
-import com.example.hcm_102_0006.android_project_m.service.model.GenreResponse;
-import com.example.hcm_102_0006.android_project_m.service.model.Movie;
-import com.example.hcm_102_0006.android_project_m.service.model.MovieDetail;
-import com.example.hcm_102_0006.android_project_m.service.model.ResultResponse;
+import com.example.hcm_102_0006.android_project_m.remote.model.GenreResponse;
+import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
+import com.example.hcm_102_0006.android_project_m.remote.model.MovieDetail;
+import com.example.hcm_102_0006.android_project_m.remote.model.ResultResponse;
 
 import retrofit.http.GET;
 import retrofit.http.Path;

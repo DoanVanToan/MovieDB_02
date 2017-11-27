@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.data;
+package com.example.hcm_102_0006.android_project_m.local;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -7,10 +7,10 @@ import android.support.v7.widget.GridLayoutManager;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.service.model.Genres;
-import com.example.hcm_102_0006.android_project_m.service.model.GenreResponse;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
+import com.example.hcm_102_0006.android_project_m.remote.model.Genres;
+import com.example.hcm_102_0006.android_project_m.remote.model.GenreResponse;
+import com.example.hcm_102_0006.android_project_m.remote.repository.MovieApi;
+import com.example.hcm_102_0006.android_project_m.remote.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityGenresBinding;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
 
