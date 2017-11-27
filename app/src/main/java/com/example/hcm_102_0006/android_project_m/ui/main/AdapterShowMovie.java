@@ -30,7 +30,7 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
     public static String KEY_MOVIE = "ID_MOVIE";
     private static Activity mContext;
     private static List<Movie> sMovies;
-    public AdapterShowMovie(List<Movie> mMovies, Activity context) {
+    public AdapterShowMovie(Activity context, List<Movie> mMovies) {
         this.mContext = context;
         this.sMovies = mMovies;
     }
@@ -67,8 +67,8 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
         public void setBinding(Movie movie) {
             if (mItemMovieBinding.getItemView() == null) mItemMovieBinding.setItemView(this);
             title.set(movie.getTitle());
-            voteAverage.set(movie.getVote_average() + "");
-            profileImage.set(movie.getPoster_path());
+            voteAverage.set(movie.getVoteAverage() + "");
+            profileImage.set(movie.getPosterPath());
         }
 
         @BindingAdapter("imageUrl")

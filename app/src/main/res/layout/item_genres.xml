@@ -4,8 +4,11 @@
     <data>
 
         <variable
-            name="itemView"
-            type="com.example.hcm_102_0006.android_project_m.ui.genre.AdapterShowGenres.GenresViewHolder" />
+            name="genre"
+            type="com.example.hcm_102_0006.android_project_m.data.model.Genres" />
+        <variable
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel" />
 
     </data>
 
@@ -17,13 +20,14 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{()->viewModel.onItemGenreClicked(genre)}">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sizeTextHeader"
-                android:text="@{itemView.mGenresTitle}"/>
+                android:text="@{genre.name}"/>
 
         </android.support.v7.widget.CardView>
     </LinearLayout>

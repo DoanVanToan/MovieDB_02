@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.hcm_102_0006.android_project_m.service.model.VideoResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -31,16 +32,18 @@ public class MovieDetail extends BaseObservable implements Parcelable {
     private String mOriginalTitle;
     @SerializedName("genres")
     private List<Genres> mGenres;
+    @SerializedName("videos")
+    private VideoResponse mVideos;
 
     public MovieDetail(
-            int id, String poster_path, List<Company> production_companies,
-            float vote_average, String overview, String original_title) {
+            int id, String posterPath, List<Company> productionCompanies,
+            float voteAverage, String overview, String originalTitle) {
         this.mId = id;
-        this.mPosterPath = poster_path;
-        this.mProductionCompanies = production_companies;
-        this.mVoteAverage = vote_average;
+        this.mPosterPath = posterPath;
+        this.mProductionCompanies = productionCompanies;
+        this.mVoteAverage = voteAverage;
         this.mOverview = overview;
-        this.mOriginalTitle = original_title;
+        this.mOriginalTitle = originalTitle;
     }
 
     protected MovieDetail(Parcel in) {
@@ -71,28 +74,28 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         this.mId = id;
     }
 
-    public String getPoster_path() {
+    public String getPosterPath() {
         return mPosterPath;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.mPosterPath = poster_path;
+    public void setPosterPath(String posterPath) {
+        this.mPosterPath = posterPath;
     }
 
-    public List<Company> getProduction_companies() {
+    public List<Company> getProductionPompanies() {
         return mProductionCompanies;
     }
 
-    public void setProduction_companies(List<Company> production_companies) {
-        this.mProductionCompanies = production_companies;
+    public void setProductionCompanies(List<Company> productionCompanies) {
+        this.mProductionCompanies = productionCompanies;
     }
 
-    public float getVote_average() {
+    public float getVoteAverage() {
         return mVoteAverage;
     }
 
-    public void setVote_average(float vote_average) {
-        this.mVoteAverage = vote_average;
+    public void setVoteAverage(float voteAverage) {
+        this.mVoteAverage = voteAverage;
     }
 
     public String getOverview() {
@@ -103,12 +106,12 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         this.mOverview = overview;
     }
 
-    public String getOriginal_title() {
+    public String getOriginalTitle() {
         return mOriginalTitle;
     }
 
-    public void setOriginal_title(String original_title) {
-        this.mOriginalTitle = original_title;
+    public void setOriginalTitle(String originalTitle) {
+        this.mOriginalTitle = originalTitle;
     }
 
     public List<Genres> getmGenres() {
@@ -117,6 +120,14 @@ public class MovieDetail extends BaseObservable implements Parcelable {
 
     public void setmGenres(List<Genres> mGenres) {
         this.mGenres = mGenres;
+    }
+
+    public VideoResponse getmVideos() {
+        return mVideos;
+    }
+
+    public void setmVideos(VideoResponse mVideos) {
+        this.mVideos = mVideos;
     }
 
     @Override
@@ -165,23 +176,23 @@ public class MovieDetail extends BaseObservable implements Parcelable {
     }
 
     public String getAllProduction() {
-        String allCompany = "Production : ";
-        for ( Company company: mProductionCompanies) {
+        String allCompany = "Productions : ";
+        for (Company company : mProductionCompanies) {
             allCompany += company.getName() + ", ";
         }
         if (allCompany.length() > 2) {
-            allCompany = allCompany.substring(0,allCompany.length()-2);
+            allCompany = allCompany.substring(0, allCompany.length() - 2);
         }
         return allCompany;
     }
 
     public String getAllGenres() {
         String genres = "Genres : ";
-        for ( Genres genre: mGenres) {
-            genres += genre.getName() +  ", ";
+        for (Genres genre : mGenres) {
+            genres += genre.getName() + ", ";
         }
         if (genres.length() > 2) {
-            genres = genres.substring(0,genres.length()-2);
+            genres = genres.substring(0, genres.length() - 2);
         }
         return genres;
     }
