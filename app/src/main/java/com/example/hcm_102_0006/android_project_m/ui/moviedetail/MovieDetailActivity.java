@@ -8,10 +8,11 @@ import android.widget.Toast;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
 
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
+import com.example.hcm_102_0006.android_project_m.data.source.FavoriteDataSource;
+import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLocalDataSource;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 
@@ -23,14 +24,16 @@ import com.google.android.youtube.player.YouTubePlayer;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
     private static final int RECOVERY_DIALOG_REQUEST = 1;
     private ActivityMovieDetailBinding mActivityMovieDetailBinding;
     private Movie mMovie;
-    private MovieDataSource mMovieDataSource;
+    private FavoriteLocalDataSource mMovieDataSource;
     private MovieDetail mMovieDetail;
+    private FavoriteDataSource  mFavoriteDataSource;
 
 
     @Override
@@ -40,11 +43,8 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                 .setContentView(this, R.layout.activity_movie_detail);
         mMovie = getIntent().getParcelableExtra(AdapterShowMovie.KEY_MOVIE);
         mActivityMovieDetailBinding.setMovieDatabaseBinding(this);
-        mMovieDataSource = new MovieDataSource(this);
+        mMovieDataSource = new FavoriteLocalDataSource(this);
         getInformationMovieDetail(mMovie.getId());
-        // Youtube API
-
-
     }
 
     public void getInformationMovieDetail(String movieId){
@@ -66,8 +66,15 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
 
                     @Override
                     public void onNext(MovieDetail movieDetail) {
+                        final boolean[] abc = {true};
+                        mMovieDataSource.isFavoriteMovie(String.valueOf(movieDetail.getId())).subscribe(new Action1<Boolean>() {
+                            @Override
+                            public void call(Boolean aBoolean) {
+                                abc[0] = aBoolean;
+                            }
+                        });
                         mActivityMovieDetailBinding.setMovieDetailBinding(movieDetail);
-                        if (mMovieDataSource.checkFavorite(mMovie.getId())) {
+                        if (abc[0]) {
                             mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(true);
                         } else {
                             mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(false);
@@ -81,11 +88,11 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     public void saveOrDeleteMovieFavorite(View view) {
         boolean isFavorite = mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.isFavorite();
         if ( isFavorite ) {
-            mMovieDataSource.deleteMovie(mMovie.getId());
+            mFavoriteDataSource.deleteMovie(mMovie);
             mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(false);
             Toast.makeText(this, getResources().getString(R.string.msg_delete_movie), Toast.LENGTH_SHORT).show();
         } else {
-            mMovieDataSource.insertMovie(mMovie);
+            mFavoriteDataSource.deleteMovie(mMovie);
             mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(true);
             Toast.makeText(this, getResources().getString(R.string.msg_save_movie), Toast.LENGTH_SHORT).show();
         }

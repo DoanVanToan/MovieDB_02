@@ -4,7 +4,7 @@ import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.data.model.GenreResponse;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
-import com.example.hcm_102_0006.android_project_m.service.model.ResultResponse;
+import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
 
 
 import retrofit.http.GET;

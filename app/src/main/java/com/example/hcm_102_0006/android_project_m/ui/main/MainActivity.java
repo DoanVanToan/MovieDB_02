@@ -1,6 +1,5 @@
 package com.example.hcm_102_0006.android_project_m.ui.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -13,15 +12,12 @@ import android.view.View;
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
 
-import com.example.hcm_102_0006.android_project_m.data.model.Genres;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
-
-import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
+import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
+import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLocalDataSource;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityHomeBinding;
-import com.example.hcm_102_0006.android_project_m.service.model.ResultResponse;
-import com.example.hcm_102_0006.android_project_m.ui.genre.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.ui.genre.GenresActivity;
 
 import java.util.ArrayList;
@@ -30,6 +26,7 @@ import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
@@ -41,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Movie> mMoviesAgain;
     private AdapterShowMovie mAdapterShowMovie;
     private ActivityHomeBinding mActivityHomeBinding;
-    private MovieDataSource mMovieDataSource;
+    private FavoriteLocalDataSource mMovieDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         mMovies = new ArrayList<>();
         mCategories = new ArrayList<>();
         mMoviesAgain = new ArrayList<>();
-        mMovieDataSource = new MovieDataSource(this);
+        mMovieDataSource = new FavoriteLocalDataSource(this);
 
         mCategories.addAll(Arrays.asList(getResources().getStringArray(R.array.categories)));
         mAdapterShowMovie = new AdapterShowMovie(this, mMovies);
@@ -134,7 +131,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button_favorite:
                 mMovies.clear();
                 mMoviesAgain.clear();
-                mMovies.addAll(mMovieDataSource.getAllMovieFavorite());
+                mMovieDataSource.getAllMovieFavorite().subscribe(new Action1<List<Movie>>() {
+                    @Override
+                    public void call(List<Movie> movies) {
+                        mMovies.addAll(movies);
+                    }
+                });
+                //mMovies.addAll(mMovieDataSource.getAllMovieFavorite());
                 mMoviesAgain.addAll(mMovies);
                 mAdapterShowMovie.notifyDataSetChanged();
                 break;

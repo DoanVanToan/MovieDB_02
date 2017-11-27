@@ -7,6 +7,7 @@
             name="movieDetailBinding"
             type="com.example.hcm_102_0006.android_project_m.data.model.MovieDetail" />
 
+
         <variable
             name="movieDatabaseBinding"
             type="com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailActivity" />
