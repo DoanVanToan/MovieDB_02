@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
 import com.example.hcm_102_0006.android_project_m.service.model.Movie;
@@ -70,7 +71,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                             mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(false);
                         }
                         mMovieDetail = movieDetail;
-                        mActivityMovieDetailBinding.youTubeShowVideo.initialize(DeveloperKey.DEVELOP_KEY,MovieDetailActivity.this);
+                        mActivityMovieDetailBinding.youTubeShowVideo.initialize(BuildConfig.YOUTUBE_KEY,MovieDetailActivity.this);
                     }
                 });
     }
@@ -109,7 +110,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RECOVERY_DIALOG_REQUEST) {
-            mActivityMovieDetailBinding.youTubeShowVideo.initialize(DeveloperKey.DEVELOP_KEY,this);
+            mActivityMovieDetailBinding.youTubeShowVideo.initialize(BuildConfig.YOUTUBE_KEY,this);
         }
     }
 }

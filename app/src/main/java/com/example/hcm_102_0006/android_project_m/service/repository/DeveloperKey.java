@@ -5,5 +5,5 @@ package com.example.hcm_102_0006.android_project_m.service.repository;
  */
 
 public class DeveloperKey {
-    public static final String DEVELOP_KEY = "AIzaSyADDdmasYNumHvYxldv28AX6gkw0Yg4wJM";
+
 }
