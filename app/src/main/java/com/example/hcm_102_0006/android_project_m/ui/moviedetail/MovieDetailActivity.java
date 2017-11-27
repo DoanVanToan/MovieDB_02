@@ -16,7 +16,6 @@ import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
-import com.example.hcm_102_0006.android_project_m.service.repository.DeveloperKey;
 import com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -51,7 +50,8 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     public void getInformationMovieDetail(String movieId){
         MovieApi movieApi = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
 
-        movieApi.getMovieDetail(movieId).subscribeOn(Schedulers.io())
+        movieApi.getMovieDetail(movieId,BuildConfig.MOVIE_KEY,"videos").subscribeOn(Schedulers.io())
+
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MovieDetail>() {
                     @Override

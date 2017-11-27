@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
 
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getInformationMovies(String category) {
         MovieApi service = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        service.getMovie(category)
+        service.getMovie(category,BuildConfig.MOVIE_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResultResponse>() {
