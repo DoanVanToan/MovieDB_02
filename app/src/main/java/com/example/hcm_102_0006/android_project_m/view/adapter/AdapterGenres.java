@@ -64,6 +64,7 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
 
         public void onResultGenre(View view){
             Intent intent = new Intent();
+            Genres genres = mGenres.get(getAdapterPosition());
             intent.putExtra(KEY_RESULT,mGenres.get(getAdapterPosition()));
             mContext.setResult(Activity.RESULT_OK,intent);
             mContext.finish();

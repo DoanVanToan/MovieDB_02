@@ -59,5 +59,6 @@ public class Genres implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(mId);
         parcel.writeString(mName);
+
     }
 }

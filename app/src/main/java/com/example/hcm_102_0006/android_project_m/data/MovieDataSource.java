@@ -36,10 +36,6 @@ public class MovieDataSource extends DatabaseHelper {
 
     public boolean checkFavorite(String id) {
         boolean isFavorite = false;
-        String[] projection = {
-                MovieTable.MovieEntry.COLUMN_MOVIEID,
-                MovieTable.MovieEntry.COLUMN_TITLE,
-                MovieTable.MovieEntry.COLUM_POTER_PATH};
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         String selection = MovieTable.MovieEntry.COLUMN_MOVIEID + " =?";
@@ -63,11 +59,11 @@ public class MovieDataSource extends DatabaseHelper {
         return result != -1;
     }
 
-    public boolean deleteMovie(Movie movie) {
-        if (movie == null) return false;
+    public boolean deleteMovie(String idMovie) {
+        if (idMovie == null || idMovie == "") return false;
         SQLiteDatabase db = getWritableDatabase();
         String whereClause = MovieTable.MovieEntry.COLUMN_MOVIEID + " =?";
-        long result = db.delete(MovieTable.MovieEntry.TABLE_NAME, whereClause,new String[]{movie.getId()});
+        long result = db.delete(MovieTable.MovieEntry.TABLE_NAME, whereClause, new String[]{idMovie});
         db.close();
         return result != -1;
     }
