@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mMovieDataSource = new MovieDataSource(this);
 
         mCategories.addAll(Arrays.asList(getResources().getStringArray(R.array.categories)));
-        mAdapterShowMovie = new AdapterShowMovie(mMovies, this);
+        mAdapterShowMovie = new AdapterShowMovie(this, mMovies);
         mActivityHomeBinding.rcyShowMovies.setLayoutManager(new GridLayoutManager(this, 2));
         mActivityHomeBinding.rcyShowMovies.setAdapter(mAdapterShowMovie);
         mActivityHomeBinding.setHomeDataBinding(this);
@@ -82,16 +82,6 @@ public class MainActivity extends AppCompatActivity {
                         mMovies.addAll(result.getResults());
                         mAdapterShowMovie.notifyDataSetChanged();
                         mMoviesAgain.addAll(mMovies);
-                        int cour = 0;
-                        for (Movie movie : mMovies) {
-                            if (!mMovieDataSource.checkFavorite(movie.getId())){
-                                //mMovieDataSource.insertMovie(movie);
-                            }
-                            if (cour == 4) {
-                                break;
-                            }
-                            cour++;
-                        }
                     }
                 });
     }
@@ -123,19 +113,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void getMoviesFollowCategory(View view) {
         switch (view.getId()) {
-            case R.id.button_Popular:
+            case R.id.button_popular:
                 getInformationMovies(mCategories.get(2));
                 break;
-            case R.id.button_NowPlaying:
+            case R.id.button_now_playing:
                 getInformationMovies(mCategories.get(1));
                 break;
-            case R.id.button_TopRate:
+            case R.id.button_top_rate:
                 getInformationMovies(mCategories.get(0));
                 break;
-            case R.id.button_Genres:
+            case R.id.button_genres:
                 startActivityForResult(new Intent(this, GenresActivity.class), RESPONSE);
                 break;
-            case R.id.button_Upcoming:
+            case R.id.button_upcoming:
                 getInformationMovies(mCategories.get(3));
                 break;
             case R.id.button_favorite:

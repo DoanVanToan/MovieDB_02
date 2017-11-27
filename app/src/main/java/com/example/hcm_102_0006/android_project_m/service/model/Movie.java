@@ -74,6 +74,20 @@ public class Movie implements Parcelable {
         return contentValues;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mId);
+        parcel.writeFloat(mVoteAverage);
+        parcel.writeString(mTitle);
+        parcel.writeString(mOverview);
+        parcel.writeString(mPosterPath);
+    }
+
     public String getId() {
         return mId;
     }
@@ -82,12 +96,12 @@ public class Movie implements Parcelable {
         this.mId = id;
     }
 
-    public float getVote_average() {
+    public float getVoteAverage() {
         return mVoteAverage;
     }
 
-    public void setVote_average(float vote_average) {
-        this.mVoteAverage = vote_average;
+    public void setVoteAverage(float voteAverage) {
+        this.mVoteAverage = voteAverage;
     }
 
     public String getTitle() {
@@ -106,25 +120,11 @@ public class Movie implements Parcelable {
         this.mOverview = overview;
     }
 
-    public String getPoster_path() {
+    public String getPosterPath() {
         return mPosterPath;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.mPosterPath = poster_path;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(mId);
-        parcel.writeFloat(mVoteAverage);
-        parcel.writeString(mTitle);
-        parcel.writeString(mOverview);
-        parcel.writeString(mPosterPath);
+    public void setPosterPath(String posterPath) {
+        this.mPosterPath = posterPath;
     }
 }

@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
+import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresMovieBinding;
 import com.example.hcm_102_0006.android_project_m.service.model.Genres;
-import com.example.hcm_102_0006.android_project_m.databinding.ItemGenres2Binding;
 
 import java.util.List;
 
@@ -24,7 +24,8 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
     private Activity mContext;
     public static final String KEY_RESULT = "GENRES";
     private List<Genres> mGenres;
-    public AdapterGenres(List<Genres> mGenres,Activity context) {
+
+    public AdapterGenres(Activity context, List<Genres> mGenres) {
         this.mContext = context;
         this.mGenres = mGenres;
     }
@@ -32,9 +33,9 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemGenres2Binding itemGenres2Binding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_genres_2, parent, false);
-        return new MyViewHolder(itemGenres2Binding);
+        ItemGenresMovieBinding itemGenresMovieBinding =
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_genres_movie, parent, false);
+        return new MyViewHolder(itemGenresMovieBinding);
     }
 
     @Override
@@ -50,23 +51,22 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ObservableField<String> title = new ObservableField<>();
 
-        public ItemGenres2Binding itemGenres2Binding;
+        public ItemGenresMovieBinding itemGenresMovieBinding;
 
-        public MyViewHolder(ItemGenres2Binding itemGenres2Binding) {
-            super(itemGenres2Binding.getRoot());
-            this.itemGenres2Binding = itemGenres2Binding;
+        public MyViewHolder(ItemGenresMovieBinding itemGenresMovieBinding) {
+            super(itemGenresMovieBinding.getRoot());
+            this.itemGenresMovieBinding = itemGenresMovieBinding;
         }
 
         public void setBinding(Genres genres) {
-            if (itemGenres2Binding.getItemGenres() == null) itemGenres2Binding.setItemGenres(this);
+            if (itemGenresMovieBinding.getItemGenres() == null) itemGenresMovieBinding.setItemGenres(this);
             title.set(genres.getName());
         }
 
-        public void onResultGenre(View view){
+        public void onResultGenre(View view) {
             Intent intent = new Intent();
-            Genres genres = mGenres.get(getAdapterPosition());
-            intent.putExtra(KEY_RESULT,mGenres.get(getAdapterPosition()));
-            mContext.setResult(Activity.RESULT_OK,intent);
+            intent.putExtra(KEY_RESULT, mGenres.get(getAdapterPosition()));
+            mContext.setResult(Activity.RESULT_OK, intent);
             mContext.finish();
         }
 

@@ -31,7 +31,7 @@ public class GenresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mActivityGenresBinding = DataBindingUtil.setContentView(this, R.layout.activity_genres);
         mGenresMovies = new ArrayList<>();
-        adapterGenres = new AdapterGenres(mGenresMovies,this);
+        adapterGenres = new AdapterGenres(this, mGenresMovies);
         mActivityGenresBinding.rcyShowGenres.setLayoutManager(new GridLayoutManager(this,2));
         mActivityGenresBinding.rcyShowGenres.setAdapter(adapterGenres);
         getListGenres();
