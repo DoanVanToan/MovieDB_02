@@ -8,7 +8,6 @@ import android.os.Parcelable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.hcm_102_0006.android_project_m.service.model.VideoResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
