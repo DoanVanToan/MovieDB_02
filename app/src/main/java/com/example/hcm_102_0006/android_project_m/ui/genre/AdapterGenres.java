@@ -1,17 +1,14 @@
 package com.example.hcm_102_0006.android_project_m.ui.genre;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
-import com.example.hcm_102_0006.android_project_m.databinding.ItemGenres2Binding;
+import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresBinding;
+
 
 import java.util.List;
 
@@ -35,6 +32,7 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
         }
         mGenres.addAll(genres);
         notifyDataSetChanged();
+
     }
 
     public void setViewModel(GenresViewModel viewModel) {
@@ -43,10 +41,11 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemGenres2Binding itemGenres2Binding =
+        ItemGenresBinding itemGenres2Binding =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                        R.layout.item_genres_2, parent, false);
+                        R.layout.item_genres, parent, false);
         return new MyViewHolder(itemGenres2Binding);
+
     }
 
     @Override
@@ -61,9 +60,9 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemGenres2Binding mBinding;
+        private ItemGenresBinding mBinding;
 
-        public MyViewHolder(ItemGenres2Binding binding) {
+        public MyViewHolder(ItemGenresBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }

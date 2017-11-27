@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/txtS"
+            android:id="@+id/text_Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableRight="@android:drawable/ic_menu_edit"
@@ -34,46 +34,46 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/button_Popular"
+                    android:id="@+id/button_popular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{homeDataBinding::getMoviesFollowCategory}"
-                    android:text="@string/menu_popular" />
+                    android:text="@string/action_popular" />
 
                 <Button
-                    android:id="@+id/button_TopRate"
+                    android:id="@+id/button_top_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{homeDataBinding::getMoviesFollowCategory}"
-                    android:text="@string/menu_topRate" />
+                    android:text="@string/action_topRate" />
 
                 <Button
-                    android:id="@+id/button_Genres"
+                    android:id="@+id/button_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{homeDataBinding::getMoviesFollowCategory}"
-                    android:text="@string/menu_genres" />
+                    android:text="@string/action_genres" />
 
                 <Button
-                    android:id="@+id/button_Upcoming"
+                    android:id="@+id/button_upcoming"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{homeDataBinding::getMoviesFollowCategory}"
-                    android:text="@string/menu_upcoming" />
+                    android:text="@string/action_upcoming" />
 
                 <Button
-                    android:id="@+id/button_NowPlaying"
+                    android:id="@+id/button_now_playing"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{homeDataBinding::getMoviesFollowCategory}"
-                    android:text="@string/menu_nowPlaying" />
+                    android:text="@string/action_now_playing" />
 
                 <Button
                     android:id="@+id/button_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{homeDataBinding::getMoviesFollowCategory}"
-                    android:text="@string/menu_favorite"/>
+                    android:text="@string/action_favorite"/>
             </TableRow>
         </HorizontalScrollView>
 
