@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
@@ -89,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private void getInformationMoviesGenre(String category) {
         MovieApi service = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
         service.getMovieGenres(category,BuildConfig.MOVIE_KEY, "en-US", false, "created_at.asc")
+
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResultResponse>() {
