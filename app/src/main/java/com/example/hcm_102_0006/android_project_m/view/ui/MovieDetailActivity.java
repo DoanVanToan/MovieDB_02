@@ -3,21 +3,27 @@ package com.example.hcm_102_0006.android_project_m.view.ui;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.local.MovieDataSource;
+import com.example.hcm_102_0006.android_project_m.remote.model.Genres;
 import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
 import com.example.hcm_102_0006.android_project_m.remote.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
+import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowMovie;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,7 +35,8 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     private Movie mMovie;
     private MovieDataSource mMovieDataSource;
     private MovieDetail mMovieDetail;
-
+    private List<Genres> mGenres;
+    private AdapterGenres mAdapterGenres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +44,14 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
         mActivityMovieDetailBinding = DataBindingUtil
                 .setContentView(this, R.layout.activity_movie_detail);
         mMovie = getIntent().getParcelableExtra(AdapterShowMovie.KEY_MOVIE);
+        mGenres = new ArrayList<>();
+        mAdapterGenres = new AdapterGenres(this,mGenres);
+        mActivityMovieDetailBinding.recyclerShowActor.setLayoutManager(
+                new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
+        mActivityMovieDetailBinding.recyclerShowActor.setAdapter(mAdapterGenres);
         mActivityMovieDetailBinding.setMovieDatabaseBinding(this);
         mMovieDataSource = new MovieDataSource(this);
         getInformationMovieDetail(mMovie.getId());
-        // Youtube API
-
-
     }
 
     public void getInformationMovieDetail(String movieId) {
@@ -69,6 +78,8 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                             mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(false);
                         }
                         mMovieDetail = movieDetail;
+                        mGenres.clear();
+                        mGenres.addAll(movieDetail.getmGenres());
                         mActivityMovieDetailBinding.youTubeShowVideo.initialize(BuildConfig.YOUTUBE_KEY,MovieDetailActivity.this);
                     }
                 });

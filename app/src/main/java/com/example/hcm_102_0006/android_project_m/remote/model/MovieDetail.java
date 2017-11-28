@@ -164,16 +164,6 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         }
     }
 
-    @BindingAdapter("imageUrl")
-    public static void setImageUrl(ImageView imageView, String url) {
-        Context context = imageView.getContext();
-        String imagePath = "http://image.tmdb.org/t/p/w185/" + url;
-        Glide.with(context)
-                .load(imagePath)
-                .fitCenter()
-                .into(imageView);
-    }
-
     public String getAllProduction() {
         String allCompany = "Productions : ";
         for (Company company : mProductionCompanies) {
@@ -195,6 +185,4 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         }
         return genres;
     }
-
-
 }

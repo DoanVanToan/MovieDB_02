@@ -30,7 +30,6 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
         this.mGenres = mGenres;
     }
 
-
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemGenresMovieBinding itemGenresMovieBinding =
@@ -49,26 +48,26 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<String> title = new ObservableField<>();
+        public ObservableField<Genres> mGenre = new ObservableField<>();
 
-        public ItemGenresMovieBinding itemGenresMovieBinding;
+        public ItemGenresMovieBinding mItemGenresMovieBinding;
 
         public MyViewHolder(ItemGenresMovieBinding itemGenresMovieBinding) {
             super(itemGenresMovieBinding.getRoot());
-            this.itemGenresMovieBinding = itemGenresMovieBinding;
+            this.mItemGenresMovieBinding = itemGenresMovieBinding;
         }
 
         public void setBinding(Genres genres) {
-            if (itemGenresMovieBinding.getItemGenres() == null) itemGenresMovieBinding.setItemGenres(this);
-            title.set(genres.getName());
+            if (mItemGenresMovieBinding.getItemGenres() == null)
+                mItemGenresMovieBinding.setItemGenres(this);
+            mGenre.set(genres);
         }
 
         public void onResultGenre(View view) {
             Intent intent = new Intent();
             intent.putExtra(KEY_RESULT, mGenres.get(getAdapterPosition()));
-            ((Activity)mContext).setResult(Activity.RESULT_OK, intent);
-            ((Activity)mContext).finish();
+            ((Activity) mContext).setResult(Activity.RESULT_OK, intent);
+            ((Activity) mContext).finish();
         }
-
     }
 }

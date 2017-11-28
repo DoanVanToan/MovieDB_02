@@ -12,15 +12,14 @@ import android.view.View;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.remote.model.Genres;
 import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
 import com.example.hcm_102_0006.android_project_m.remote.model.ResultResponse;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.local.MovieDataSource;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityHomeBinding;
-import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowMovie;
+import com.example.hcm_102_0006.android_project_m.viewmodel.impl.ModelViewModelImp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private AdapterShowMovie mAdapterShowMovie;
     private ActivityHomeBinding mActivityHomeBinding;
     private MovieDataSource mMovieDataSource;
+    private ModelViewModelImp mModelViewModelImp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
         mMovies = new ArrayList<>();
         mCategories = new ArrayList<>();
+        mCategories.addAll(Arrays.asList(getResources().getStringArray(R.array.categories)));
         mMoviesAgain = new ArrayList<>();
         mMovieDataSource = new MovieDataSource(this);
 
-        mCategories.addAll(Arrays.asList(getResources().getStringArray(R.array.categories)));
         mAdapterShowMovie = new AdapterShowMovie(this, mMovies);
         mActivityHomeBinding.rcyShowMovies.setLayoutManager(new GridLayoutManager(this, 2));
         mActivityHomeBinding.rcyShowMovies.setAdapter(mAdapterShowMovie);
         mActivityHomeBinding.setHomeDataBinding(this);
-        getInformationMovies(mCategories.get(0));
+        mModelViewModelImp = new ModelViewModelImp(this,mMovies,mAdapterShowMovie,mCategories);
+        mActivityHomeBinding.setHomeClink(mModelViewModelImp);
 
     }
 
@@ -89,7 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void getInformationMoviesGenre(String category) {
         MovieApi service = MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        service.getMovieGenres(category)
+        service.getMovieGenres(
+                category, BuildConfig.MOVIE_KEY, "en-US", false, "created_at.asc")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ResultResponse>() {
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
+                        mMovies.clear();
                     }
 
                     @Override
@@ -112,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void getMoviesFollowCategory(View view) {
+    /*public void getMoviesFollowCategory(View view) {
         switch (view.getId()) {
             case R.id.button_popular:
-                getInformationMovies(mCategories.get(2));
+                //getInformationMovies(mCategories.get(2));
                 break;
             case R.id.button_now_playing:
                 getInformationMovies(mCategories.get(1));
@@ -137,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 mAdapterShowMovie.notifyDataSetChanged();
                 break;
         }
-    }
+    }*/
 
     public TextWatcher nameWatcher() {
         return new TextWatcher() {
@@ -171,12 +174,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESPONSE) {
+        mModelViewModelImp.handleActivityResult(requestCode,resultCode,data);
+        /*if (requestCode == RESPONSE) {
             if (resultCode == Activity.RESULT_OK) {
-                Genres genres = (Genres) data.getParcelableExtra(AdapterGenres.KEY_RESULT);
+                Genres genres = data.getParcelableExtra(AdapterGenres.KEY_RESULT);
                 getInformationMoviesGenre(String.valueOf(genres.getId()));
             }
-        }
-
+        }*/
     }
 }

@@ -17,6 +17,7 @@ import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemMovieBinding;
 import com.example.hcm_102_0006.android_project_m.view.ui.MovieDetailActivity;
+import com.example.hcm_102_0006.android_project_m.viewmodel.MovieViewModel;
 
 import java.util.List;
 
@@ -28,11 +29,11 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
 
     public static final int KEY_DETAIL = 321;
     public static final String KEY_MOVIE = "ID_MOVIE";
-    private static Context mContext;
-    private static List<Movie> sMovies;
+    private Context mContext;
+    public List<Movie> mMovies;
     public AdapterShowMovie(Context context, List<Movie> mMovies) {
         this.mContext = context;
-        this.sMovies = mMovies;
+        this.mMovies = mMovies;
     }
 
     @Override
@@ -44,18 +45,16 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.setBinding(sMovies.get(position));
+        holder.setBinding(mMovies.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return sMovies == null ? 0 : sMovies.size();
+        return mMovies == null ? 0 : mMovies.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<String> title = new ObservableField<>();
-        public ObservableField<String> voteAverage = new ObservableField<>();
-        public ObservableField<String> profileImage = new ObservableField<>();
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public ObservableField<Movie> mMovie = new ObservableField<>();
 
         public ItemMovieBinding mItemMovieBinding;
 
@@ -66,23 +65,13 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
 
         public void setBinding(Movie movie) {
             if (mItemMovieBinding.getItemView() == null) mItemMovieBinding.setItemView(this);
-            title.set(movie.getTitle());
-            voteAverage.set(movie.getVoteAverage() + "");
-            profileImage.set(movie.getPosterPath());
+            mMovie.set(movie);
         }
 
-        @BindingAdapter("imageUrl")
-        public static void setImageUrl(ImageView imageView, String url) {
-            Context context = imageView.getContext();
-            String imagePath = "http://image.tmdb.org/t/p/w185/"+ url;
-            Glide.with(context).load(imagePath).into(imageView);
-        }
-
-        public void onClickMovieDetail(View view){
+        public void onClickMovieDetail(View view) {
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
-            intent.putExtra(KEY_MOVIE,sMovies.get(getAdapterPosition()));
+            intent.putExtra(KEY_MOVIE, mMovies.get(getAdapterPosition()));
             ((Activity)mContext).startActivityForResult(intent,KEY_DETAIL);
         }
-
     }
 }

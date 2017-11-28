@@ -1,14 +1,17 @@
 package com.example.hcm_102_0006.android_project_m.view.adapter;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.remote.model.Genres;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresBinding;
+import com.example.hcm_102_0006.android_project_m.remote.model.MovieDetail;
 
 import java.util.List;
 
@@ -18,21 +21,22 @@ import java.util.List;
 
 public class AdapterShowGenres extends RecyclerView.Adapter<AdapterShowGenres.GenresViewHolder> {
     private List<Genres> mGenres;
+    private List<MovieDetail.Company> mCompanies;
+    private Context mContext;
 
-    public AdapterShowGenres(List<Genres> mGenres) {
+    public AdapterShowGenres(Context context, List<Genres> mGenres,List<MovieDetail.Company> companies) {
+        this.mContext = context;
         this.mGenres = mGenres;
+        this.mCompanies = companies;
     }
 
     @Override
     public GenresViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemGenresBinding itemGenresBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_genres, parent, false);
-        return new GenresViewHolder(itemGenresBinding);
+        return null;
     }
 
     @Override
     public void onBindViewHolder(GenresViewHolder holder, int position) {
-        holder.setBinding(mGenres.get(position));
     }
 
     @Override
@@ -41,17 +45,9 @@ public class AdapterShowGenres extends RecyclerView.Adapter<AdapterShowGenres.Ge
     }
 
     public class GenresViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<String> mGenresTitle = new ObservableField<>("");
-        public ItemGenresBinding mItemGenresBinding;
 
-        public GenresViewHolder(ItemGenresBinding itemGenresBinding) {
-            super(itemGenresBinding.getRoot());
-            mItemGenresBinding = itemGenresBinding;
-        }
-
-        public void setBinding(Genres genres) {
-            if (mItemGenresBinding == null) mItemGenresBinding.setItemView(this);
-            mGenresTitle.set(genres.getName());
+        public GenresViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }

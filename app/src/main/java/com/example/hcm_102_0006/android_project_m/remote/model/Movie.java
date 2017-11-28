@@ -2,6 +2,7 @@ package com.example.hcm_102_0006.android_project_m.remote.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by hcm-102-0006 on 21/11/2017.
  */
-public class Movie implements Parcelable {
+public class Movie extends BaseObservable implements Parcelable {
     @SerializedName("id")
     private String mId;
     @SerializedName("vote_average")
