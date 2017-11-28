@@ -7,5 +7,4 @@ import android.view.View;
  */
 
 public interface GenresViewModel {
-    void onResultGenre(View view);
 }

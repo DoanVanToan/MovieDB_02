@@ -36,7 +36,7 @@ public class MovieDataSource extends DatabaseHelper {
         boolean isFavorite = false;
 
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        String selection = MovieTable.MovieEntry.COLUMN_MOVIEID + " =?";
+        String selection = MovieTable.MovieEntry.COLUMN_MOVIE_ID + " =?";
         String[] selectionArgs = {String.valueOf(id)};
         Cursor cursor = sqLiteDatabase.query(MovieTable.MovieEntry.TABLE_NAME, null, selection, selectionArgs, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -60,7 +60,7 @@ public class MovieDataSource extends DatabaseHelper {
     public boolean deleteMovie(String idMovie) {
         if (idMovie == null || idMovie == "") return false;
         SQLiteDatabase db = getWritableDatabase();
-        String whereClause = MovieTable.MovieEntry.COLUMN_MOVIEID + " =?";
+        String whereClause = MovieTable.MovieEntry.COLUMN_MOVIE_ID + " =?";
         long result = db.delete(MovieTable.MovieEntry.TABLE_NAME, whereClause, new String[]{idMovie});
         db.close();
         return result != -1;

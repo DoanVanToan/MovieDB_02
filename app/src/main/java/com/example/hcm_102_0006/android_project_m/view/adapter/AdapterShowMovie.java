@@ -3,21 +3,16 @@ package com.example.hcm_102_0006.android_project_m.view.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.remote.model.Movie;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemMovieBinding;
 import com.example.hcm_102_0006.android_project_m.view.ui.MovieDetailActivity;
-import com.example.hcm_102_0006.android_project_m.viewmodel.MovieViewModel;
 
 import java.util.List;
 

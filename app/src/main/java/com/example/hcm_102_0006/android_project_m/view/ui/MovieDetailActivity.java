@@ -16,7 +16,6 @@ import com.example.hcm_102_0006.android_project_m.remote.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
-import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowMovie;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -36,7 +35,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     private MovieDataSource mMovieDataSource;
     private MovieDetail mMovieDetail;
     private List<Genres> mGenres;
-    private AdapterGenres mAdapterGenres;
+    private List<MovieDetail.Company> mCompanies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +44,8 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                 .setContentView(this, R.layout.activity_movie_detail);
         mMovie = getIntent().getParcelableExtra(AdapterShowMovie.KEY_MOVIE);
         mGenres = new ArrayList<>();
-        mAdapterGenres = new AdapterGenres(this,mGenres);
-        mActivityMovieDetailBinding.recyclerShowActor.setLayoutManager(
-                new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
-        mActivityMovieDetailBinding.recyclerShowActor.setAdapter(mAdapterGenres);
+        mCompanies = new ArrayList<>();
+
         mActivityMovieDetailBinding.setMovieDatabaseBinding(this);
         mMovieDataSource = new MovieDataSource(this);
         getInformationMovieDetail(mMovie.getId());

@@ -13,6 +13,7 @@ import com.example.hcm_102_0006.android_project_m.remote.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.remote.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityGenresBinding;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
+import com.example.hcm_102_0006.android_project_m.viewmodel.impl.MovieGenreViewModelImp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,41 +26,17 @@ public class GenresActivity extends AppCompatActivity {
 
     private ActivityGenresBinding mActivityGenresBinding;
     private List<Genres> mGenresMovies;
-    public AdapterGenres adapterGenres;
+    private AdapterGenres mAdapterGenres;
+    private MovieGenreViewModelImp mMovieGenreViewModelImp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivityGenresBinding = DataBindingUtil.setContentView(this, R.layout.activity_genres);
         mGenresMovies = new ArrayList<>();
-        adapterGenres = new AdapterGenres(this, mGenresMovies);
+        mAdapterGenres = new AdapterGenres(this, mGenresMovies);
         mActivityGenresBinding.rcyShowGenres.setLayoutManager(new GridLayoutManager(this,2));
-        mActivityGenresBinding.rcyShowGenres.setAdapter(adapterGenres);
-        getListGenres();
-    }
-
-    public void getListGenres() {
-        MovieApi service =
-                MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        service.getGenres(BuildConfig.MOVIE_KEY)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GenreResponse>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(GenreResponse genresMovie) {
-                mGenresMovies.addAll(genresMovie.getGenres());
-                adapterGenres.notifyDataSetChanged();
-            }
-        });
+        mActivityGenresBinding.rcyShowGenres.setAdapter(mAdapterGenres);
+        mMovieGenreViewModelImp = new MovieGenreViewModelImp(this, mGenresMovies, mAdapterGenres);
     }
 }

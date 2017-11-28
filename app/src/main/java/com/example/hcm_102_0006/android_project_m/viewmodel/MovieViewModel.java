@@ -1,6 +1,7 @@
 package com.example.hcm_102_0006.android_project_m.viewmodel;
 
 
+import android.text.TextWatcher;
 import android.view.View;
 
 /**
@@ -9,5 +10,6 @@ import android.view.View;
 
 public interface MovieViewModel{
     void onClinkMovie (View view);
-
+    TextWatcher nameWatcher();
+    void onItemRecyclerViewClick(View view);
 }
