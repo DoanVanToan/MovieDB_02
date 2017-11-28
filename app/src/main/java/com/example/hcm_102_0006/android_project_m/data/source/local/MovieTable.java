@@ -12,7 +12,7 @@ public class MovieTable  {
         public static final String COLUMN_MOVIEID = "id";
         public static final String COLUM_POTER_PATH = "image_path";
         public static final String COLUM_OVERVIEW = "overview";
-        public static final String COLUMN_TITLE = "title";
+        public static final String COLUMN_TITLE = "mTitle";
         public static final String COLUMN_VOTE_AVERAGE = "vote_average";
     }
 }

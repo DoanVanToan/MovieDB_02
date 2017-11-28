@@ -28,8 +28,15 @@ public interface MovieApi {
     Observable<GenreResponse> getGenres(@Query("api_key") String apiKey);
 
     // get movie genres
-    @GET("/genre/{genre_id}/movies?api_key=" + BuildConfig.MOVIE_KEY + "&language=en-US&include_adult=false&sort_by=created_at.asc")
-    Observable<ResultResponse> getMovieGenres(@Path("genre_id") String genreId);
+    // https://api.themoviedb.org/3/genre/{genre_id}/movies?api_key=c733ac6aba3d86364a56d1145bc1d1f9&language=en-US&include_adult=false&sort_by=created_at.asc
+    //@GET("/genre/{genre_id}/movies?api_key=" + BuildConfig.MOVIE_KEY + "&language=en-US&include_adult=false&sort_by=created_at.asc")
+    @GET("/genre/{genre_id}/movies")
+    Observable<ResultResponse> getMovieGenres(
+            @Path("genre_id") String genreId,
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("include_adult") boolean includeAdult,
+            @Query("sort_by") String sortBy);
 
     // get movie detail /movie/{movie_id}
     @GET("/movie/{movie_id}")
@@ -40,11 +47,14 @@ public interface MovieApi {
 
     // Get videos
     //get /movie/{movie_id}/videos
-    @GET("/movie/{movie_id}/videos?api_key=" + BuildConfig.MOVIE_KEY)
-    Observable<MovieDetail> getMovieVideo(@Path("movie_id") String movieId);
+    @GET("/movie/{movie_id}/videos")
+    Observable<MovieDetail> getMovieVideo(@Path("movie_id") String movieId,@Query("api_key") String apiKey);
 
     // Get all movie of company https://api.themoviedb.org/3/company/{company_id}/movies?api_key=c733ac6aba3d86364a56d1145bc1d1f9&language=en-US
     // /company/{company_id}/movies
-    @GET("/company/{company_id}/movies?api_key=" + BuildConfig.MOVIE_KEY + "&language=en-US")
-    Observable<Movie> getMovieCompany(@Path("company_id") String companyId);
+    @GET("/company/{company_id}/movies")
+    Observable<Movie> getMovieCompany(
+            @Path("company_id") String companyId,
+            @Query("api_key") String apiKey ,
+            @Query("language") String language);
 }

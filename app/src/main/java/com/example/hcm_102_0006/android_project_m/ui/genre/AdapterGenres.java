@@ -19,6 +19,7 @@ import java.util.List;
 // bua chac tai e lam gi loi ben itemGenres ( ben code moi thi e xoadi roi, dung a)
 // bo qua no di a. no. da. a
 public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHolder> {
+    public static final String  BUNDLE_GENRES = "BUNDLE_GENRES";
     private List<Genres> mGenres;
     private GenresViewModel mViewModel;
 
@@ -74,4 +75,6 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
         }
 
     }
+
+
 }
