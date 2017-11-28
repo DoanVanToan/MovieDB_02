@@ -41,9 +41,9 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     private FavoriteLocalDataSource mMovieDataSource;
     private MovieDetail mMovieDetail;
     private FavoriteLocalDataSource mFavoriteDataSource;
-
-    private List<Genres> mGenres;
     private AdapterGenres mAdapterGenres;
+    private List<Genres> mGenres;
+    private List<MovieDetail.Company> mCompanies;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +54,10 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
         mMovie = getIntent().getParcelableExtra(AdapterShowMovie.KEY_MOVIE);
         mGenres = new ArrayList<>();
         mAdapterGenres = new AdapterGenres(mGenres);
-        mActivityMovieDetailBinding.recyclerShowActor.setLayoutManager(
+        mActivityMovieDetailBinding.recyclerShowProduction.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mActivityMovieDetailBinding.recyclerShowActor.setAdapter(mAdapterGenres);
+        mActivityMovieDetailBinding.recyclerShowProduction.setAdapter(mAdapterGenres);
+        mCompanies = new ArrayList<>();
         mActivityMovieDetailBinding.setMovieDatabaseBinding(this);
         mMovieDataSource = new FavoriteLocalDataSource(this);
         getInformationMovieDetail(mMovie.getId());
@@ -113,7 +114,6 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                     }
                 }
             });
-
         } else {
             mFavoriteDataSource.insertMovie(mMovie).subscribe(new Action1<Boolean>() {
                 @Override

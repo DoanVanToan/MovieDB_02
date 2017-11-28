@@ -28,11 +28,11 @@ public class Movie extends BaseObservable implements Parcelable {
     }
 
     public Movie(Cursor cursor) {
-        mId = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_MOVIEID));
+        mId = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_MOVIE_ID));
         mVoteAverage = cursor.getFloat(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE));
         mTitle = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_TITLE));
-        mOverview = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUM_OVERVIEW));
-        mPosterPath = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUM_POTER_PATH));
+        mOverview = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_OVERVIEW));
+        mPosterPath = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_POSTER_PATH));
     }
 
     protected Movie(Parcel in) {
@@ -58,7 +58,7 @@ public class Movie extends BaseObservable implements Parcelable {
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
         if (mId != null) {
-            contentValues.put(MovieTable.MovieEntry.COLUMN_MOVIEID, mId);
+            contentValues.put(MovieTable.MovieEntry.COLUMN_MOVIE_ID, mId);
         }
         if (mVoteAverage != 0) {
             contentValues.put(MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE, mVoteAverage);
@@ -67,10 +67,10 @@ public class Movie extends BaseObservable implements Parcelable {
             contentValues.put(MovieTable.MovieEntry.COLUMN_TITLE, mTitle);
         }
         if (mOverview != null) {
-            contentValues.put(MovieTable.MovieEntry.COLUM_OVERVIEW, mOverview);
+            contentValues.put(MovieTable.MovieEntry.COLUMN_OVERVIEW, mOverview);
         }
         if (mPosterPath != null) {
-            contentValues.put(MovieTable.MovieEntry.COLUM_POTER_PATH, mPosterPath);
+            contentValues.put(MovieTable.MovieEntry.COLUMN_POSTER_PATH, mPosterPath);
         }
         return contentValues;
     }
