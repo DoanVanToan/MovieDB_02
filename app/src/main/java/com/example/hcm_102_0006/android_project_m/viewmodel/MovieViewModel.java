@@ -1,0 +1,15 @@
+package com.example.hcm_102_0006.android_project_m.viewmodel;
+
+
+import android.text.TextWatcher;
+import android.view.View;
+
+/**
+ * Created by hcm-102-0006 on 27/11/2017.
+ */
+
+public interface MovieViewModel{
+    void onClinkMovie (View view);
+    TextWatcher nameWatcher();
+    void onItemRecyclerViewClick(View view);
+}
