@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="com.example.hcm_102_0006.android_project_m.viewmodel.BindingUtils"/>
+        <import type="com.example.hcm_102_0006.android_project_m.viewmodel.BindingUtils" />
 
         <variable
             name="movieDetailBinding"
@@ -52,45 +52,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(movieDetailBinding.getVoteAverage)}"/>
+                    android:text="@{String.valueOf(movieDetailBinding.getVoteAverage)}" />
 
                 <com.github.ivbaranov.mfb.MaterialFavoriteButton
                     android:id="@+id/btn_SaveOrDeleteFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:shadowColor="#6986fa"
                     android:onClick="@{movieDatabaseBinding::saveOrDeleteMovieFavorite}"
+                    android:shadowColor="#6986fa"
                     app:mfb_color="black"
                     app:mfb_type="heart" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{movieDetailBinding.getAllGenres}" />
+                android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:text="@string/action_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/sizeTextHeader2"/>
+                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:text="Production : " />
+
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_show_actor"
+                    android:id="@+id/recycler_show_production"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/text_ShowProductProduction"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{movieDetailBinding.getAllProduction}"/>
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"

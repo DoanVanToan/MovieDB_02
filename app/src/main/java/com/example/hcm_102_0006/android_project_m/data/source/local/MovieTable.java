@@ -9,10 +9,10 @@ import android.provider.BaseColumns;
 public class MovieTable  {
     public static class MovieEntry implements BaseColumns{
         public static final String TABLE_NAME = "tbl_movie_favorite";
-        public static final String COLUMN_MOVIEID = "id";
-        public static final String COLUM_POTER_PATH = "image_path";
-        public static final String COLUM_OVERVIEW = "overview";
-        public static final String COLUMN_TITLE = "mTitle";
+        public static final String COLUMN_MOVIE_ID = "id";
+        public static final String COLUMN_POSTER_PATH = "image_path";
+        public static final String COLUMN_OVERVIEW = "overview";
+        public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_VOTE_AVERAGE = "vote_average";
     }
 }

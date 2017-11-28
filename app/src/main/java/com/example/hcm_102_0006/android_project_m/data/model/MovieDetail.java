@@ -163,26 +163,4 @@ public class MovieDetail extends BaseObservable implements Parcelable {
             this.name = name;
         }
     }
-
-    public String getAllProduction() {
-        String allCompany = "Productions : ";
-        for (Company company : mProductionCompanies) {
-            allCompany += company.getName() + ", ";
-        }
-        if (allCompany.length() > 2) {
-            allCompany = allCompany.substring(0, allCompany.length() - 2);
-        }
-        return allCompany;
-    }
-
-    public String getAllGenres() {
-        String genres = "Genres : ";
-        for (Genres genre : mGenres) {
-            genres += genre.getName() + ", ";
-        }
-        if (genres.length() > 2) {
-            genres = genres.substring(0, genres.length() - 2);
-        }
-        return genres;
-    }
 }

@@ -16,7 +16,7 @@ import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLoca
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityHomeBinding;
-import com.example.hcm_102_0006.android_project_m.viewmodel.impl.ModelViewModelImp;
+import com.example.hcm_102_0006.android_project_m.viewmodel.impl.MovieViewModelImp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,6 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private AdapterShowMovie mAdapterShowMovie;
     private ActivityHomeBinding mActivityHomeBinding;
     private FavoriteLocalDataSource mMovieDataSource;
-    private ModelViewModelImp mModelViewModelImp;
+    private MovieViewModelImp mModelViewModelImp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mActivityHomeBinding.rcyShowMovies.setLayoutManager(new GridLayoutManager(this, 2));
         mActivityHomeBinding.rcyShowMovies.setAdapter(mAdapterShowMovie);
         mActivityHomeBinding.setHomeDataBinding(this);
-        mModelViewModelImp = new ModelViewModelImp(this,mMovies,mAdapterShowMovie,mCategories,mMovieDataSource);
+        mModelViewModelImp = new MovieViewModelImp(this,mMovies,mAdapterShowMovie,mCategories,mMovieDataSource);
         mActivityHomeBinding.setHomeClink(mModelViewModelImp);
 
     }
@@ -177,13 +176,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         mModelViewModelImp.handleActivityResult(requestCode,resultCode,data);
-        /*if (requestCode == RESPONSE) {
-            if (resultCode == Activity.RESULT_OK) {
-                Genres genres = data.getParcelableExtra(AdapterGenres.KEY_RESULT);
-                getInformationMoviesGenre(String.valueOf(genres.getId()));
-            }
-        }*/
     }
 }

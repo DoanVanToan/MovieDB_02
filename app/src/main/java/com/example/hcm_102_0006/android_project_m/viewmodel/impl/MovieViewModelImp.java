@@ -3,6 +3,8 @@ package com.example.hcm_102_0006.android_project_m.viewmodel.impl;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 
 import com.example.hcm_102_0006.android_project_m.BuildConfig;
@@ -19,6 +21,7 @@ import com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie;
 import com.example.hcm_102_0006.android_project_m.ui.main.MainActivity;
 import com.example.hcm_102_0006.android_project_m.viewmodel.MovieViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
@@ -30,21 +33,25 @@ import rx.schedulers.Schedulers;
  * Created by hcm-102-0006 on 28/11/2017.
  */
 
-public class ModelViewModelImp implements MovieViewModel {
+public class MovieViewModelImp implements MovieViewModel {
     private Context mContext;
     private List<Movie> mMovies;
     private List<String> mCategories;
     private AdapterShowMovie mAdapterShowMovie;
+    private List<Movie> mMoviesAgain;
     private FavoriteLocalDataSource mMovieDataSource;
 
-    public ModelViewModelImp(Context context, List<Movie> movies, AdapterShowMovie adapterShowMovie, List<String> categories,FavoriteLocalDataSource favoriteLocalDataSource) {
+    public MovieViewModelImp(Context context, List<Movie> movies, AdapterShowMovie adapterShowMovie,
+                             List<String> categories,FavoriteLocalDataSource favoriteLocalDataSource) {
         this.mContext = context;
         this.mMovies = movies;
         this.mAdapterShowMovie = adapterShowMovie;
         this.mCategories = categories;
         this.mMovieDataSource = favoriteLocalDataSource;
+        mMoviesAgain = new ArrayList<>();
         getInformationMovies(mCategories.get(0));
     }
+
 
     public void getInformationMovies(String category) {
         MovieApi service = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
@@ -65,7 +72,9 @@ public class ModelViewModelImp implements MovieViewModel {
                     @Override
                     public void onNext(ResultResponse result) {
                         mMovies.clear();
+                        mMoviesAgain.clear();
                         mMovies.addAll(result.getResults());
+                        mMoviesAgain.addAll(mMovies);
                     }
                 });
     }
@@ -90,8 +99,9 @@ public class ModelViewModelImp implements MovieViewModel {
                     @Override
                     public void onNext(ResultResponse result) {
                         mMovies.clear();
+                        mMoviesAgain.clear();
                         mMovies.addAll(result.getResults());
-
+                        mMoviesAgain.addAll(mMovies);
                     }
                 });
     }
@@ -127,6 +137,41 @@ public class ModelViewModelImp implements MovieViewModel {
                 mAdapterShowMovie.notifyDataSetChanged();
                 break;
         }
+    }
+
+    @Override
+    public TextWatcher nameWatcher() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                mMovies.clear();
+                String enterCharacter = charSequence.toString().toUpperCase().trim();
+                if (enterCharacter == "") {
+                    mMovies.addAll(mMoviesAgain);
+                } else {
+                    for (Movie movie : mMoviesAgain) {
+                        String templateSearch = movie.getTitle().toUpperCase();
+                        if (templateSearch.contains(enterCharacter)) {
+                            mMovies.add(movie);
+                        }
+                    }
+                }
+                mAdapterShowMovie.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        };
+    }
+
+    @Override
+    public void onItemRecyclerViewClick(View view) {
+
     }
 
     public void handleActivityResult(int requestCode, int resultCode, Intent data) {

@@ -2,14 +2,12 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="genre"
             type="com.example.hcm_102_0006.android_project_m.data.model.Genres" />
         <variable
             name="viewModel"
             type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel" />
-
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
