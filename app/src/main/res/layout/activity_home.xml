@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="homeDataBinding"
+            type="com.example.hcm_102_0006.android_project_m.view.ui.MainActivity" />
+        <variable
+            name="homeClink"
+            type="com.example.hcm_102_0006.android_project_m.viewmodel.MovieViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/text_Search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableRight="@android:drawable/ic_menu_edit"
+            android:hint="@string/search"
+            app:addTextChangedListener="@{homeDataBinding.nameWatcher}" />
+
+        <HorizontalScrollView
+            android:id="@+id/lgListCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/marginBottomHorizontalScrollView">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+<!--android:onClick="@{homeDataBinding::getMoviesFollowCategory}"-->
+                <Button
+                    android:id="@+id/button_popular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_popular"
+                    android:onClick="@{homeClink.onClinkMovie}"
+                    />
+
+                <Button
+                    android:id="@+id/button_top_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{homeClink.onClinkMovie}"
+                    android:text="@string/action_topRate" />
+
+                <Button
+                    android:id="@+id/button_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{homeClink.onClinkMovie}"
+                    android:text="@string/action_genres" />
+
+                <Button
+                    android:id="@+id/button_upcoming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{homeClink.onClinkMovie}"
+                    android:text="@string/action_upcoming" />
+
+                <Button
+                    android:id="@+id/button_now_playing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{homeClink.onClinkMovie}"
+                    android:text="@string/action_now_playing" />
+
+                <Button
+                    android:id="@+id/button_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{homeClink.onClinkMovie}"
+                    android:text="@string/action_favorite"/>
+            </TableRow>
+        </HorizontalScrollView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcyShowMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lgListCategories" />
+    </LinearLayout>
+</layout>
