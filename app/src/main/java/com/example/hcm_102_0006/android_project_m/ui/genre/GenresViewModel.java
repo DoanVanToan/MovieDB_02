@@ -1,6 +1,8 @@
 package com.example.hcm_102_0006.android_project_m.ui.genre;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.widget.Toast;
@@ -55,6 +57,10 @@ public class GenresViewModel extends BaseObservable {
 
     public void onItemGenreClicked(Genres genres){
         Toast.makeText(mContext, genres.getName(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.putExtra(AdapterGenres.BUNDLE_GENRES,genres);
+        ((Activity)mContext).setResult(Activity.RESULT_OK,intent);
+        ((Activity)mContext).finish();
     }
 
     public void onStop() {
@@ -69,9 +75,4 @@ public class GenresViewModel extends BaseObservable {
     public void setAdapter(AdapterGenres adapter) {
         mAdapter = adapter;
     }
-    // da hieu roi a. hay ghe a
-    // a thu lam e phan onclich vs
-    // ko e lam a xem thu nha
-
-    // dạ,vậy là mình xử lý khi trong onstart khi quay lại app nó tụ refesh , khi thoat nó clear het du lieu luon phia ko
 }

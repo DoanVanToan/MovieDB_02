@@ -9,8 +9,6 @@
             name="viewModel"
             type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel"/>
     </data>
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,4 +16,5 @@
             android:padding="@dimen/marginBetween2Item"
             android:text="@{genre.name}"
             android:textSize="@dimen/size_header" />
+
 </layout>
