@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void getInformationMoviesGenre(String category) {
+    private void getInformationMoviesGenre123(String category) {
         MovieApi service = MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
         service.getMovieGenres(
                 category, BuildConfig.MOVIE_KEY, "en-US", false, "created_at.asc")
