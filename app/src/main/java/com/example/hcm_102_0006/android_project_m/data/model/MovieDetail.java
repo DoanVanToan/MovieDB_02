@@ -1,13 +1,10 @@
 package com.example.hcm_102_0006.android_project_m.data.model;
 
-import android.content.Context;
 import android.databinding.BaseObservable;
-import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.example.hcm_102_0006.android_project_m.remote.model.CreditsResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -33,17 +30,8 @@ public class MovieDetail extends BaseObservable implements Parcelable {
     private List<Genres> mGenres;
     @SerializedName("videos")
     private VideoResponse mVideos;
-
-    public MovieDetail(
-            int id, String posterPath, List<Company> productionCompanies,
-            float voteAverage, String overview, String originalTitle) {
-        this.mId = id;
-        this.mPosterPath = posterPath;
-        this.mProductionCompanies = productionCompanies;
-        this.mVoteAverage = voteAverage;
-        this.mOverview = overview;
-        this.mOriginalTitle = originalTitle;
-    }
+    @SerializedName("credits")
+    private CreditsResponse mCredits;
 
     protected MovieDetail(Parcel in) {
         mId = in.readInt();
@@ -127,6 +115,14 @@ public class MovieDetail extends BaseObservable implements Parcelable {
 
     public void setmVideos(VideoResponse mVideos) {
         this.mVideos = mVideos;
+    }
+
+    public CreditsResponse getmCredits() {
+        return mCredits;
+    }
+
+    public void setmCredits(CreditsResponse mCredits) {
+        this.mCredits = mCredits;
     }
 
     @Override

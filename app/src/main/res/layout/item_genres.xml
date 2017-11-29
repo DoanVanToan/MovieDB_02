@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel" />
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/sizeTextHeader"
                 android:text="@{genre.name}"/>
+
 
 
         </android.support.v7.widget.CardView>
