@@ -11,14 +11,19 @@ import com.example.hcm_102_0006.android_project_m.BuildConfig;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
+import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
 import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLocalDataSource;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
+import com.example.hcm_102_0006.android_project_m.data.model.CreditsResponse;
 import com.example.hcm_102_0006.android_project_m.ui.genre.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.ui.genre.GenresActivity;
 import com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie;
 import com.example.hcm_102_0006.android_project_m.ui.main.MainActivity;
+import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCompany;
+import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCreditDetail;
+import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowGenresDetail;
 import com.example.hcm_102_0006.android_project_m.viewmodel.MovieViewModel;
 
 import java.util.ArrayList;
@@ -179,6 +184,18 @@ public class MovieViewModelImp implements MovieViewModel {
             if (resultCode == Activity.RESULT_OK) {
                 Genres genres = data.getParcelableExtra(AdapterGenres.BUNDLE_GENRES);
                 getInformationMoviesGenre(String.valueOf(genres.getId()));
+            }
+        } else if (requestCode == AdapterShowMovie.KEY_DETAIL){
+            if (resultCode == AdapterShowGenresDetail.KEY_GENRES_DETAIL) {
+                Genres genres = data.getParcelableExtra(AdapterShowGenresDetail.BUNDLE_GENRES_DETAIL);
+                String a = "";
+                getInformationMoviesGenre(String.valueOf(genres.getId()));
+            }else if (resultCode == AdapterShowCreditDetail.KEY_CREDIT_DETAIL) {
+                CreditsResponse.Credit credit = data.getParcelableExtra(AdapterShowCreditDetail.BUNDLE_CREDIT_DETAIL);
+                String a = "";
+            }else if (resultCode == AdapterShowCompany.KEY_COMPANY_DETAIL) {
+                MovieDetail.Company company = data.getParcelableExtra(AdapterShowCompany.BUNDLE_COMPANY);
+                String a = "";
             }
         }
     }

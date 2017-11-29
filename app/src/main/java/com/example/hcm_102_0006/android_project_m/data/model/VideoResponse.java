@@ -75,7 +75,6 @@ public class VideoResponse implements Parcelable{
             mName = in.readString();
         }
 
-
         public String getmId() {
             return mId;
         }
@@ -108,5 +107,4 @@ public class VideoResponse implements Parcelable{
             this.mName = mName;
         }
     }
-
 }

@@ -19,11 +19,13 @@ import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
+import com.example.hcm_102_0006.android_project_m.data.model.CreditsResponse;
 import com.example.hcm_102_0006.android_project_m.ui.genre.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie;
 
 
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCompany;
+import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCreditDetail;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowGenresDetail;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -47,8 +49,10 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
     private AdapterGenres mAdapterGenres;
     private List<Genres> mGenres;
     private List<MovieDetail.Company> mCompanies;
+    private List<CreditsResponse.Credit> mCredits;
     private AdapterShowCompany mAdapterShowCompany;
     private AdapterShowGenresDetail mAdapterShowGenresDetail;
+    private AdapterShowCreditDetail mAdapterShowCreditDetail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,8 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mActivityMovieDetailBinding.recyclerShowProduction.setAdapter(mAdapterGenres);
         mCompanies = new ArrayList<>();
+        mCredits = new ArrayList<>();
+
         mAdapterShowCompany = new AdapterShowCompany(this, mCompanies);
         mActivityMovieDetailBinding.recyclerShowProduction.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
@@ -74,6 +80,11 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                 new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
         mActivityMovieDetailBinding.recyclerShowGenres.setAdapter(mAdapterShowGenresDetail);
 
+        mAdapterShowCreditDetail = new AdapterShowCreditDetail(this, mCredits);
+        mActivityMovieDetailBinding.recyclerShowCredit.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayout.HORIZONTAL, false));
+        mActivityMovieDetailBinding.recyclerShowCredit.setAdapter(mAdapterShowCreditDetail);
+
         mActivityMovieDetailBinding.setMovieDatabaseBinding(this);
         mMovieDataSource = new FavoriteLocalDataSource(this);
         getInformationMovieDetail(mMovie.getId());
@@ -81,7 +92,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
 
     public void getInformationMovieDetail(String movieId) {
         MovieApi movieApi = MovieServiceClient.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        movieApi.getMovieDetail(movieId, BuildConfig.MOVIE_KEY, "videos").subscribeOn(Schedulers.io())
+        movieApi.getMovieDetail(movieId, BuildConfig.MOVIE_KEY, "videos,credits").subscribeOn(Schedulers.io())
 
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<MovieDetail>() {
@@ -115,6 +126,7 @@ public class MovieDetailActivity extends YouTubeBaseActivity implements YouTubeP
                         mGenres.clear();
                         mGenres.addAll(movieDetail.getmGenres());
                         mCompanies.addAll(movieDetail.getProductionPompanies());
+                        mCredits.addAll(movieDetail.getmCredits().getmCast());
                         mActivityMovieDetailBinding.youTubeShowVideo.initialize(BuildConfig.YOUTUBE_KEY, MovieDetailActivity.this);
                     }
                 });

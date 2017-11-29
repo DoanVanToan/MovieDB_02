@@ -16,4 +16,7 @@
     <string name="msg_save_movie">Your favorite movie has been saved</string>
     <string name="msg_delete_movie">Your favorite movie has been deleted</string>
     <string name="title_trailer">Trailer</string>
+    <string name="title_production">Production : </string>
+    <string name="title_genres">Genres : </string>
+    <string name="title_credit">Credit : </string>
 </resources>
