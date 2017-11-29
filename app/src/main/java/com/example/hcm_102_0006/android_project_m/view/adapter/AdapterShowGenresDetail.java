@@ -1,10 +1,13 @@
 package com.example.hcm_102_0006.android_project_m.view.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
@@ -21,6 +24,7 @@ public class AdapterShowGenresDetail extends RecyclerView.Adapter<AdapterShowGen
     private List<Genres> mGenres;
     private Context mContext;
     public static final String BUNDLE_GENRES_DETAIL = "BUNDLE_GENRES_DETAIL";
+    public static final int KEY_GENRES_DETAIL = 123;
 
     public AdapterShowGenresDetail(Context context, List<Genres> genres) {
         this.mGenres = genres;
@@ -57,6 +61,13 @@ public class AdapterShowGenresDetail extends RecyclerView.Adapter<AdapterShowGen
             /*if (mItemGenresBinding.getViewModel() == null)
                 mItemGenresBinding.setViewModel(this);
             mGenre.set(genre);*/
+        }
+
+        public void onResultGenres(View view) {
+            Intent intent = new Intent();
+            intent.putExtra(BUNDLE_GENRES_DETAIL, mGenres.get(getAdapterPosition()));
+            ((Activity) mContext).setResult(KEY_GENRES_DETAIL, intent);
+            ((Activity) mContext).finish();
         }
     }
 }

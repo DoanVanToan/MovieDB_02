@@ -8,5 +8,4 @@ import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 
 public class ProjectRepository {
     private MovieApi mMovieApi;
-
 }

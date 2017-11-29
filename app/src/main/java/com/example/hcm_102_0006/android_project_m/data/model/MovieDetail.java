@@ -3,8 +3,6 @@ package com.example.hcm_102_0006.android_project_m.data.model;
 import android.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.example.hcm_102_0006.android_project_m.remote.model.CreditsResponse;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -139,9 +137,26 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         parcel.writeString(mOriginalTitle);
     }
 
-    public class Company {
+    public class Company implements Parcelable{
         private int id;
         private String name;
+
+        protected Company(Parcel in) {
+            id = in.readInt();
+            name = in.readString();
+        }
+
+        public final Creator<Company> CREATOR = new Creator<Company>() {
+            @Override
+            public Company createFromParcel(Parcel in) {
+                return new Company(in);
+            }
+
+            @Override
+            public Company[] newArray(int size) {
+                return new Company[size];
+            }
+        };
 
         public int getId() {
             return id;
@@ -157,6 +172,17 @@ public class MovieDetail extends BaseObservable implements Parcelable {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel parcel, int i) {
+            parcel.writeInt(id);
+            parcel.writeString(name);
         }
     }
 }
