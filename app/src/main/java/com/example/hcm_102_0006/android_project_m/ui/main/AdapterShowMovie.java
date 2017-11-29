@@ -24,7 +24,7 @@ import java.util.List;
 public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyViewHolder> {
 
     public static final int KEY_DETAIL = 321;
-    public static final String KEY_MOVIE = "ID_MOVIE";
+    public static final String BUNDLE_MOVIE = "BUNDLE_MOVIE";
     private Context mContext;
     public List<Movie> mMovies;
     public AdapterShowMovie(Context context, List<Movie> mMovies) {
@@ -66,7 +66,7 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
 
         public void onClickMovieDetail(View view) {
             Intent intent = new Intent(mContext, MovieDetailActivity.class);
-            intent.putExtra(KEY_MOVIE, mMovies.get(getAdapterPosition()));
+            intent.putExtra(BUNDLE_MOVIE, mMovies.get(getAdapterPosition()));
             ((Activity)mContext).startActivityForResult(intent,KEY_DETAIL);
         }
     }

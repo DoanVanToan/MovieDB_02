@@ -64,11 +64,9 @@
                     app:mfb_type="heart" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -85,10 +83,41 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/text_ShowProductProduction"
+            <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:text="Genres : " />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_show_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:text="Credits : " />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_show_credit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -108,6 +137,5 @@
                 android:layout_height="match_parent" />
 
         </LinearLayout>
-
     </ScrollView>
 </layout>
