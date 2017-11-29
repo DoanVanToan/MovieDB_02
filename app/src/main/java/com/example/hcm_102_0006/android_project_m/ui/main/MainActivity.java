@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.view.ui;
+package com.example.hcm_102_0006.android_project_m.view.ui.main;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,9 +18,9 @@ import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.data.MovieDataSource;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityHomeBinding;
-import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
-import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowMovie;
+import com.example.hcm_102_0006.android_project_m.view.ui.genre.AdapterGenres;
 
+import com.example.hcm_102_0006.android_project_m.view.ui.genre.GenresActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

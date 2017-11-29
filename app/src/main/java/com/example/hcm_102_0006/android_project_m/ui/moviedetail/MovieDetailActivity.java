@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.view.ui;
+package com.example.hcm_102_0006.android_project_m.view.ui.moviedetail;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +9,7 @@ import com.example.hcm_102_0006.android_project_m.service.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
 import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
-import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowMovie;
+import com.example.hcm_102_0006.android_project_m.view.ui.main.AdapterShowMovie;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;

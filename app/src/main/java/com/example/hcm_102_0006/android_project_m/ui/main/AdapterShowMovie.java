@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.view.adapter;
+package com.example.hcm_102_0006.android_project_m.view.ui.main;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.service.model.Movie;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemMovieBinding;
-import com.example.hcm_102_0006.android_project_m.view.ui.MovieDetailActivity;
+import com.example.hcm_102_0006.android_project_m.view.ui.moviedetail.MovieDetailActivity;
 
 import java.util.List;
 
