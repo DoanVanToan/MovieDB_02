@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:context="com.example.hcm_102_0006.android_project_m.view.ui.MovieDetailActivity">
+        tools:context="com.example.hcm_102_0006.android_project_m.view.ui.moviedetail.MovieDetailActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

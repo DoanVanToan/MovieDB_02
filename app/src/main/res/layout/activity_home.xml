@@ -5,7 +5,7 @@
 
         <variable
             name="homeDataBinding"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.MainActivity" />
+            type="com.example.hcm_102_0006.android_project_m.view.ui.main.MainActivity" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

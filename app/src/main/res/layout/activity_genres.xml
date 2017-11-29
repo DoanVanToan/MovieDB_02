@@ -5,7 +5,7 @@
 
         <variable
             name="genresDataBinding"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.GenresActivity" />
+            type="com.example.hcm_102_0006.android_project_m.view.ui.genre.GenresActivity" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
