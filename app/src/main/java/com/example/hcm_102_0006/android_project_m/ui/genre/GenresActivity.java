@@ -1,21 +1,14 @@
-package com.example.hcm_102_0006.android_project_m.view.ui;
+package com.example.hcm_102_0006.android_project_m.view.ui.genre;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.service.model.Genres;
-import com.example.hcm_102_0006.android_project_m.service.model.GenreResponse;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
+import com.example.hcm_102_0006.android_project_m.data.model.Genres;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityGenresBinding;
-import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterGenres;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -24,7 +17,7 @@ public class GenresActivity extends AppCompatActivity {
 
     private ActivityGenresBinding mActivityGenresBinding;
     private List<Genres> mGenresMovies;
-    public AdapterGenres adapterGenres;
+    public AdaptegrGenres adapterGenres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +31,8 @@ public class GenresActivity extends AppCompatActivity {
     }
 
     public void getListGenres() {
+        // REFACTOR LẠI CODE.
+        // NÊN GET DÂT THÔNG QUA REPOSSITORY
         MovieApi service =
                 MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
         service.getGenres()

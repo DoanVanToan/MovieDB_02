@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.view.adapter;
+package com.example.hcm_102_0006.android_project_m.view.ui.genre;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
