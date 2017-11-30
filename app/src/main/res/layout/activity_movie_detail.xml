@@ -4,15 +4,15 @@
     <data>
 
         <import type="com.example.hcm_102_0006.android_project_m.utils.DataBindingUtils" />
+        <import type="android.view.View" />
 
         <variable
             name="movieDetailBinding"
             type="com.example.hcm_102_0006.android_project_m.data.model.MovieDetail" />
 
-
         <variable
-            name="movieDatabaseBinding"
-            type="com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailActivity" />
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel" />
 
     </data>
 
@@ -23,8 +23,6 @@
         android:gravity="center"
         android:orientation="vertical"
         tools:context="com.example.hcm_102_0006.android_project_m.view.ui.moviedetail.MovieDetailActivity">
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -52,13 +50,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(movieDetailBinding.getVoteAverage)}" />
+                    android:text="@{String.valueOf(movieDetailBinding.voteAverage)}" />
 
                 <com.github.ivbaranov.mfb.MaterialFavoriteButton
                     android:id="@+id/btn_SaveOrDeleteFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{movieDatabaseBinding::saveOrDeleteMovieFavorite}"
+                    android:onClick="@{()->viewModel.saveOrDeleteMovieFavorite()}"
                     android:shadowColor="#6986fa"
                     app:mfb_color="black"
                     app:mfb_type="heart" />
@@ -66,9 +64,9 @@
 
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -80,13 +78,17 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_show_production"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    adapter="@{viewModel.mAdapterShowCompany}"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"
+                    />
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -98,13 +100,17 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_show_genres"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    adapter="@{viewModel.mAdapterShowGenresDetail}"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"
+                    />
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
@@ -116,7 +122,10 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_show_credit"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    adapter="@{viewModel.mAdapterShowCreditDetail}"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"/>
             </LinearLayout>
 
             <TextView

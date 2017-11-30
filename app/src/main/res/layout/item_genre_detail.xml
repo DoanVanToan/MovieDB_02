@@ -3,8 +3,11 @@
 
     <data>
         <variable
+            name="genre"
+            type="com.example.hcm_102_0006.android_project_m.data.model.Genres"/>
+        <variable
             name="itemView"
-            type="com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowGenresDetail.GenresViewHolder"/>
+            type="com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel"/>
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,11 +15,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/marginBetween2Item"
-        android:onClick="@{itemView::onResultGenres}">
+        android:onClick="@{()->itemView.onResultGenres(genre)}">>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{itemView.mGenre.getName}"/>
+            android:text="@{genre.getName}"/>
     </LinearLayout>
 </layout>

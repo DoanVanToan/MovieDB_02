@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,8 @@ import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
-import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresBinding;
+import com.example.hcm_102_0006.android_project_m.databinding.ItemGenreDetailBinding;
+import com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel;
 
 import java.util.List;
 
@@ -25,16 +25,29 @@ public class AdapterShowGenresDetail extends RecyclerView.Adapter<AdapterShowGen
     private Context mContext;
     public static final String BUNDLE_GENRES_DETAIL = "BUNDLE_GENRES_DETAIL";
     public static final int KEY_GENRES_DETAIL = 123;
+    public MovieDetailViewModel mMovieDetailViewModel;
 
     public AdapterShowGenresDetail(Context context, List<Genres> genres) {
         this.mGenres = genres;
         this.mContext = context;
     }
 
+    public void addData(List<Genres> genres) {
+        if (genres != null) {
+            mGenres.clear();
+            mGenres.addAll(genres);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setMovieDetailViewModel(MovieDetailViewModel movieDetailViewModel) {
+        mMovieDetailViewModel = movieDetailViewModel;
+    }
+
     @Override
     public GenresViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemGenresBinding itemGenresBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_genres, parent, false);
+        ItemGenreDetailBinding itemGenresBinding =
+                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_genre_detail, parent, false);
         return new GenresViewHolder(itemGenresBinding);
     }
 
@@ -49,25 +62,18 @@ public class AdapterShowGenresDetail extends RecyclerView.Adapter<AdapterShowGen
     }
 
     public class GenresViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<Genres> mGenre = new ObservableField<>();
-        public ItemGenresBinding mItemGenresBinding;
+        public ItemGenreDetailBinding mItemGenresBinding;
 
-        public GenresViewHolder(ItemGenresBinding itemGenresBinding) {
+        public GenresViewHolder(ItemGenreDetailBinding itemGenresBinding) {
             super(itemGenresBinding.getRoot());
             this.mItemGenresBinding = itemGenresBinding;
         }
 
         public void binding(Genres genre) {
-            /*if (mItemGenresBinding.getViewModel() == null)
-                mItemGenresBinding.setViewModel(this);
-            mGenre.set(genre);*/
+            mItemGenresBinding.setGenre(genre);
+            mItemGenresBinding.setItemView(mMovieDetailViewModel);
+            mItemGenresBinding.executePendingBindings();
         }
 
-        public void onResultGenres(View view) {
-            Intent intent = new Intent();
-            intent.putExtra(BUNDLE_GENRES_DETAIL, mGenres.get(getAdapterPosition()));
-            ((Activity) mContext).setResult(KEY_GENRES_DETAIL, intent);
-            ((Activity) mContext).finish();
-        }
     }
 }

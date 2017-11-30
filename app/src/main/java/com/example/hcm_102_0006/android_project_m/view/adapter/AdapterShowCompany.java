@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
+import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemCompanyBinding;
+import com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel;
 
 
 import java.util.List;
@@ -26,10 +28,23 @@ public class AdapterShowCompany extends RecyclerView.Adapter<AdapterShowCompany.
     private Context mContext;
     public static final String BUNDLE_COMPANY = "BUNDLE_COMPANY";
     public static final int KEY_COMPANY_DETAIL = 789;
+    private MovieDetailViewModel mMovieDetailViewModel;
 
     public AdapterShowCompany(Context context, List<MovieDetail.Company> companies) {
         this.mContext = context;
         this.mCompanies = companies;
+    }
+
+    public void addData(List<MovieDetail.Company> companies) {
+        if (companies != null) {
+            mCompanies.clear();
+            mCompanies.addAll(companies);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setMovieDetailViewModel(MovieDetailViewModel movieDetailViewModel) {
+        mMovieDetailViewModel = movieDetailViewModel;
     }
 
     @Override
@@ -50,7 +65,6 @@ public class AdapterShowCompany extends RecyclerView.Adapter<AdapterShowCompany.
     }
 
     public class CompanyViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<MovieDetail.Company> mCompany = new ObservableField<>();
         public ItemCompanyBinding mItemCompanyBinding;
         public CompanyViewHolder(ItemCompanyBinding itemCompanyBinding) {
             super(itemCompanyBinding.getRoot());
@@ -58,15 +72,10 @@ public class AdapterShowCompany extends RecyclerView.Adapter<AdapterShowCompany.
         }
 
         public void binding(MovieDetail.Company company){
-            if (mItemCompanyBinding.getItemView() == null)
-                mItemCompanyBinding.setItemView(this);
-            mCompany.set(company);
+            mItemCompanyBinding.setCompany(company);
+            mItemCompanyBinding.setViewModel(mMovieDetailViewModel);
+            mItemCompanyBinding.executePendingBindings();
         }
-        public void onResultCompany(View view) {
-            Intent intent = new Intent();
-            intent.putExtra(BUNDLE_COMPANY, mCompanies.get(getAdapterPosition()));
-            ((Activity) mContext).setResult(KEY_COMPANY_DETAIL, intent);
-            ((Activity) mContext).finish();
-        }
+
     }
 }

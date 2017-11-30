@@ -60,27 +60,28 @@ public class MainViewModel extends BaseObservable {
         mFavoriteLocalDataSource = new FavoriteLocalDataSource(mContext);
         getInformationMoviesGenres(mCategories.get(0));
     }
-    public void getInformationMoviesGenres(String category){
+
+    public void getInformationMoviesGenres(String category) {
         Subscription subscription = mMovieRepository.getMovieCategory(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<ResultResponse>() {
-            @Override
-            public void call(ResultResponse resultResponse) {
-                mMovies.clear();
-                mAdapterShowMovie.addData(resultResponse.getResults());
-                mMovies.addAll(resultResponse.getResults());
-            }
-        }, new Action1<Throwable>() {
-            @Override
-            public void call(Throwable throwable) {
+                    @Override
+                    public void call(ResultResponse resultResponse) {
+                        mMovies.clear();
+                        mAdapterShowMovie.addData(resultResponse.getResults());
+                        mMovies.addAll(resultResponse.getResults());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
 
-            }
-        });
+                    }
+                });
         mCompositeSubscription.add(subscription);
     }
 
-    public void getInformationMovieGenres(String genreId){
+    public void getInformationMovieGenres(String genreId) {
         Subscription subscription = mMovieRepository.getMovieGenres(genreId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -93,10 +94,12 @@ public class MainViewModel extends BaseObservable {
                     }
                 }, new Action1<Throwable>() {
                     @Override
-                    public void call(Throwable throwable) {}
+                    public void call(Throwable throwable) {
+                    }
                 });
         mCompositeSubscription.add(subscription);
     }
+
 
     public void onClinkMovie(View view) {
         mMovies.clear();
@@ -149,19 +152,58 @@ public class MainViewModel extends BaseObservable {
                 Genres genres = data.getParcelableExtra(AdapterGenres.BUNDLE_GENRES);
                 getInformationMovieGenres(String.valueOf(genres.getId()));
             }
-        } else if (requestCode == AdapterShowMovie.KEY_DETAIL){
+        } else if (requestCode == AdapterShowMovie.KEY_DETAIL) {
             if (resultCode == AdapterShowGenresDetail.KEY_GENRES_DETAIL) {
                 Genres genres = data.getParcelableExtra(AdapterShowGenresDetail.BUNDLE_GENRES_DETAIL);
-                String a = "";
-                //getInformationMoviesGenre(String.valueOf(genres.getId()));
-            }else if (resultCode == AdapterShowCreditDetail.KEY_CREDIT_DETAIL) {
+                getInformationMovieGenres(String.valueOf(genres.getId()));
+            } else if (resultCode == AdapterShowCreditDetail.KEY_CREDIT_DETAIL) {
                 CreditsResponse.Credit credit = data.getParcelableExtra(AdapterShowCreditDetail.BUNDLE_CREDIT_DETAIL);
-                String a = "";
-            }else if (resultCode == AdapterShowCompany.KEY_COMPANY_DETAIL) {
+                getCastMovieGenres(String.valueOf(credit.getmCastId()));
+            } else if (resultCode == AdapterShowCompany.KEY_COMPANY_DETAIL) {
                 MovieDetail.Company company = data.getParcelableExtra(AdapterShowCompany.BUNDLE_COMPANY);
-                String a = "";
+                getCompanyMovieGenres(String.valueOf(company.getId()));
             }
         }
+    }
+
+    public void getCompanyMovieGenres(String companyId) {
+        Subscription subscription = mMovieRepository.getMovieCompany(companyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<ResultResponse>() {
+                    @Override
+                    public void call(ResultResponse resultResponse) {
+                        mMovies.clear();
+                        mAdapterShowMovie.addData(resultResponse.getResults());
+                        mMovies.addAll(resultResponse.getResults());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+        mCompositeSubscription.add(subscription);
+    }
+
+    public void getCastMovieGenres(String castId) {
+        Subscription subscription = mMovieRepository.getMovieCompany(castId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<ResultResponse>() {
+                    @Override
+                    public void call(ResultResponse resultResponse) {
+                        mMovies.clear();
+                        mAdapterShowMovie.addData(resultResponse.getResults());
+                        mMovies.addAll(resultResponse.getResults());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+
+                    }
+                });
+        mCompositeSubscription.add(subscription);
     }
 
     public TextWatcher nameWatcher() {
@@ -186,6 +228,7 @@ public class MainViewModel extends BaseObservable {
                     mAdapterShowMovie.addData(moviesTemp);
                 }
             }
+
             @Override
             public void afterTextChanged(Editable editable) {
             }
