@@ -17,15 +17,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     + " ("
                     + MovieTable.MovieEntry._ID
                     + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + MovieTable.MovieEntry.COLUMN_MOVIEID
+                    + MovieTable.MovieEntry.COLUMN_MOVIE_ID
                     + " INTEGER, "
                     + MovieTable.MovieEntry.COLUMN_TITLE
                     + " TEXT NOT NULL, "
                     + MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE
                     + " REAL NOT NULL, "
-                    + MovieTable.MovieEntry.COLUM_POTER_PATH
+                    + MovieTable.MovieEntry.COLUMN_POSTER_PATH
                     + " TEXT NOT NULL, "
-                    + MovieTable.MovieEntry.COLUM_OVERVIEW
+                    + MovieTable.MovieEntry.COLUMN_OVERVIEW
                     + " TEXT NOT NULL "
                     + "); ";
 

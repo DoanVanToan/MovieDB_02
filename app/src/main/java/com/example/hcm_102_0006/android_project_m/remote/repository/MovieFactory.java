@@ -1,4 +1,4 @@
-package com.example.hcm_102_0006.android_project_m.data.source.remote;
+package com.example.hcm_102_0006.android_project_m.remote.repository;
 
 
 import retrofit.RestAdapter;
