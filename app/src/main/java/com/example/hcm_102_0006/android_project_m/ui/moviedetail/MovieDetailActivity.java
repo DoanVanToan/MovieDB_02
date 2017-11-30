@@ -1,50 +1,43 @@
-package com.example.hcm_102_0006.android_project_m.view.ui.moviedetail;
+package com.example.hcm_102_0006.android_project_m.ui.moviedetail;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.service.model.MovieDetail;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieApi;
-import com.example.hcm_102_0006.android_project_m.service.repository.MovieFactory;
+import com.example.hcm_102_0006.android_project_m.data.model.Movie;
+import com.example.hcm_102_0006.android_project_m.data.source.MovieRepository;
+import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLocalDataSource;
+
+import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieRemoteDataSource;
+import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieServiceClient;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
-import com.example.hcm_102_0006.android_project_m.view.ui.main.AdapterShowMovie;
+import com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie;
+import com.google.android.youtube.player.YouTubeBaseActivity;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-public class MovieDetailActivity extends AppCompatActivity {
+public class MovieDetailActivity extends YouTubeBaseActivity  {
+    private Movie mMovie;
+    private FavoriteLocalDataSource mFavoriteDataSource;
+    private MovieDetailViewModel mMovieDetailViewModel;
     private ActivityMovieDetailBinding mActivityMovieDetailBinding;
-    private String mIdMovie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivityMovieDetailBinding = DataBindingUtil.setContentView(this,R.layout.activity_movie_detail);
-        mIdMovie = getIntent().getStringExtra(AdapterShowMovie.KEY_MOVIE);
-        getInformationMovieDetail(mIdMovie);
+        mActivityMovieDetailBinding = DataBindingUtil
+                .setContentView(this, R.layout.activity_movie_detail);
+        mFavoriteDataSource = new FavoriteLocalDataSource(this);
+        mMovie = getIntent().getParcelableExtra(AdapterShowMovie.BUNDLE_MOVIE);
+
+        MovieRepository mMovieRepository = new MovieRepository(
+                new MovieRemoteDataSource(MovieServiceClient.getInstance()));
+        mMovieDetailViewModel = new MovieDetailViewModel(
+                this, mFavoriteDataSource,mMovieRepository,mMovie);
+        mActivityMovieDetailBinding.setViewModel(mMovieDetailViewModel);
     }
 
-    public void getInformationMovieDetail(String movieId){
-        MovieApi movieApi = MovieFactory.createRetrofitService(MovieApi.class, MovieApi.SERVICE_URL);
-        movieApi.getMovieDetail(movieId).subscribeOn(Schedulers.io())
-                . observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MovieDetail>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(MovieDetail movieDetail) {
-                        mActivityMovieDetailBinding.setMovieDetailBinding(movieDetail);
-                    }
-                });
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mMovieDetailViewModel.handlerActivityResult(requestCode, resultCode, data);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.hcm_102_0006.android_project_m.data.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
