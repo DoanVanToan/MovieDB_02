@@ -1,7 +1,6 @@
 package com.example.hcm_102_0006.android_project_m.data.source;
 
-
-import com.example.hcm_102_0006.android_project_m.data.model.Movie;
+import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
 
 import rx.Observable;
 
@@ -17,7 +16,12 @@ public class MovieRepository implements MovieDataSource {
     }
 
     @Override
-    public Observable<Movie> getMovieCategory(String category) {
+    public Observable<ResultResponse> getMovieCategory(String category) {
         return mMovieDataSource.getMovieCategory(category);
+    }
+
+    @Override
+    public Observable<ResultResponse> getMovieGenres(String genreId) {
+        return mMovieDataSource.getMovieGenres(genreId);
     }
 }

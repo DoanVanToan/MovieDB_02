@@ -3,20 +3,23 @@
 
     <data>
 
-        <import type="com.example.hcm_102_0006.android_project_m.viewmodel.BindingUtils" />
+        <import type="com.example.hcm_102_0006.android_project_m.utils.DataBindingUtils" />
 
         <import type="android.view.View" />
 
         <variable
-            name="itemView"
-            type="com.example.hcm_102_0006.android_project_m.ui.main.AdapterShowMovie.MyViewHolder" />
+            name="movie"
+            type="com.example.hcm_102_0006.android_project_m.data.model.Movie" />
+        <variable
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.main.MainViewModel"/>
 
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{itemView::onClickMovieDetail}"
+        android:onClick="@{()->viewModel.onClickMovieDetail(movie)}"
         android:orientation="vertical"
         android:padding="@dimen/marginBetween2Item">
 
@@ -34,20 +37,20 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:imageUrl="@{itemView.mMovie.getPosterPath}" />
+                    app:imageUrl="@{movie.getPosterPath}" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:text="@{itemView.mMovie.getTitle}"
+                    android:text="@{movie.getTitle}"
                     android:textSize="@dimen/sizeTextHeader"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(itemView.mMovie.getVoteAverage)}"
+                    android:text="@{String.valueOf(movie.getVoteAverage)}"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="@dimen/sizeTextHeader2" />
             </LinearLayout>
