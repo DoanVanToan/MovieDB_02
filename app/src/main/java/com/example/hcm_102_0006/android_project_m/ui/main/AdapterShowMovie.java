@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemMovieBinding;
@@ -26,10 +27,23 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
     public static final int KEY_DETAIL = 321;
     public static final String BUNDLE_MOVIE = "BUNDLE_MOVIE";
     private Context mContext;
-    public List<Movie> mMovies;
+    private List<Movie> mMovies;
+    private MainViewModel mMainViewModel;
+
     public AdapterShowMovie(Context context, List<Movie> mMovies) {
         this.mContext = context;
         this.mMovies = mMovies;
+    }
+
+    public void addData(List<Movie> movies) {
+        if (movies == null) {
+            mMovies.addAll(movies);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setMainViewModel(MainViewModel mainViewModel) {
+        mMainViewModel = mainViewModel;
     }
 
     @Override
@@ -65,9 +79,9 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
         }
 
         public void onClickMovieDetail(View view) {
-            Intent intent = new Intent(mContext, MovieDetailActivity.class);
+            /*Intent intent = new Intent(mContext, MovieDetailActivity.class);
             intent.putExtra(BUNDLE_MOVIE, mMovies.get(getAdapterPosition()));
-            ((Activity)mContext).startActivityForResult(intent,KEY_DETAIL);
+            ((Activity) mContext).startActivityForResult(intent, KEY_DETAIL);*/
         }
     }
 }

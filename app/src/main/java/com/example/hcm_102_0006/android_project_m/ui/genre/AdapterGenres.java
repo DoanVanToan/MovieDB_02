@@ -9,15 +9,11 @@ import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemGenresBinding;
 
-
 import java.util.List;
-
 
 /**
  * Created by hcm-102-0006 on 22/11/2017.
  */
-// bua chac tai e lam gi loi ben itemGenres ( ben code moi thi e xoadi roi, dung a)
-// bo qua no di a. no. da. a
 public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHolder> {
     public static final String  BUNDLE_GENRES = "BUNDLE_GENRES";
     private List<Genres> mGenres;
@@ -33,7 +29,6 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
         }
         mGenres.addAll(genres);
         notifyDataSetChanged();
-
     }
 
     public void setViewModel(GenresViewModel viewModel) {
@@ -46,7 +41,6 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
                 DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
                         R.layout.item_genres, parent, false);
         return new MyViewHolder(itemGenres2Binding);
-
     }
 
     @Override
@@ -73,8 +67,5 @@ public class AdapterGenres extends RecyclerView.Adapter<AdapterGenres.MyViewHold
             mBinding.setViewModel(mViewModel);
             mBinding.executePendingBindings();
         }
-
     }
-
-
 }
