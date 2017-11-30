@@ -49,7 +49,7 @@ public class GenresViewModel extends BaseObservable {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        // e tu xu ly doan nay nhe
+                        Toast.makeText(mContext, "" + throwable.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
         mCompositeSubscription.add(subscription);

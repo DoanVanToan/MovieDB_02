@@ -62,7 +62,7 @@ public class AdapterShowCreditDetail extends RecyclerView.Adapter<AdapterShowCre
             mCredit.set(credit);
         }
 
-        public void onResultCreadit(View view) {
+        public void onResultCredit(View view) {
             Intent intent = new Intent();
             intent.putExtra(BUNDLE_CREDIT_DETAIL, mCredits.get(getAdapterPosition()));
             ((Activity) mContext).setResult(KEY_CREDIT_DETAIL, intent);

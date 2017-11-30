@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/marginBetween2Item"
-        android:onClick="@{itemView::onResultCreadit}">
+        android:onClick="@{itemView::onResultCredit}">
 
         <android.support.v7.widget.CardView
             android:layout_width="wrap_content"
