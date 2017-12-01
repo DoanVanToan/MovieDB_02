@@ -2,6 +2,8 @@ package com.example.hcm_102_0006.android_project_m.data.source;
 
 import com.example.hcm_102_0006.android_project_m.data.model.GenreResponse;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
+import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
+
 import java.util.List;
 import rx.Observable;
 

@@ -3,9 +3,17 @@
 
     <data>
 
+        <import type="com.example.hcm_102_0006.android_project_m.utils.DataBindingUtils" />
+        <import type="android.view.View" />
+
         <variable
             name="movieDetailBinding"
-            type="com.example.hcm_102_0006.android_project_m.service.model.MovieDetail" />
+            type="com.example.hcm_102_0006.android_project_m.data.model.MovieDetail" />
+
+        <variable
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel" />
+
     </data>
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,8 +22,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
+        android:isScrollContainer="false"
         tools:context="com.example.hcm_102_0006.android_project_m.view.ui.moviedetail.MovieDetailActivity">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,12 +33,12 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:imageUrl="@{movieDetailBinding.poster_path}" />
+                app:imageUrl="@{movieDetailBinding.getPosterPath}" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{movieDetailBinding.original_title}"
+                android:text="@{movieDetailBinding.getOriginalTitle}"
                 android:textSize="@dimen/sizeTextHeader"
                 android:textStyle="bold" />
 
@@ -43,23 +51,83 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{String.valueOf(movieDetailBinding.vote_average)}" />
+                    android:text="@{String.valueOf(movieDetailBinding.voteAverage)}" />
 
                 <com.github.ivbaranov.mfb.MaterialFavoriteButton
+                    android:id="@+id/btn_SaveOrDeleteFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:shadowColor="#6986fa"/>
+                    android:onClick="@{()->viewModel.saveOrDeleteMovieFavorite()}"
+                    android:shadowColor="#6986fa"
+                    app:mfb_color="black"
+                    app:mfb_type="heart" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Genres : Drama, Cartoon ... " />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Actor : Banaka, Oheah ... " />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:text="@string/title_production" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_show_production"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    adapter="@{viewModel.mAdapterShowCompany}"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:text="@string/title_genres" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_show_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    adapter="@{viewModel.mAdapterShowGenresDetail}"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:text="@string/title_credit" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_show_credit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    adapter="@{viewModel.mAdapterShowCreditDetail}"
+                    android:orientation="horizontal"
+                    app:layoutManager="LinearLayoutManager"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -69,11 +137,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Trailer"
-                android:textSize="@dimen/sizeTextHeader2"
+                android:text="@string/title_trailer"
+                android:textSize="@dimen/sizeTextHeader"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/youTube_show_video"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
+        </LinearLayout>
     </ScrollView>
 </layout>
