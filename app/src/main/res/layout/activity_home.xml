@@ -45,7 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="@{viewModel.onClinkMovie}"
-                    android:text="@string/action_topRate" />
+                    android:text="@string/action_topRate"
+                    android:layout_marginRight="@dimen/sizeTextHeader2"/>
 
                 <Button
                     android:id="@+id/button_genres"
