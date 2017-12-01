@@ -4,4 +4,5 @@
     <dimen name="sizeTextHeader2">15dp</dimen>
     <dimen name="marginBottomHorizontalScrollView">10dp</dimen>
     <dimen name="marginBetween2Item">5dp</dimen>
+    <dimen name="size_header">20sp</dimen>
 </resources>

@@ -2,13 +2,10 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="genre"
-            type="com.example.hcm_102_0006.android_project_m.data.model.Genres" />
-        <variable
-            name="viewModel"
-            type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel" />
 
+        <variable
+            name="itemView"
+            type="com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCompany.CompanyViewHolder" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,17 +15,14 @@
         android:padding="@dimen/marginBetween2Item">
 
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:onClick="@{()->viewModel.onItemGenreClicked(genre)}">
+            android:onClick="@{itemView::onResultCompany}">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/sizeTextHeader"
-                android:text="@{genre.name}"/>
-
-
+                android:text="@{itemView.mCompany.name}"/>
 
         </android.support.v7.widget.CardView>
     </LinearLayout>

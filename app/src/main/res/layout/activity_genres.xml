@@ -4,8 +4,9 @@
     <data>
 
         <variable
-            name="genresDataBinding"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.genre.GenresActivity" />
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel" />
+
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,14 +30,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/sizeTextHeader"
                 android:layout_marginLeft="@dimen/sizeTextHeader2"
-                android:text="@string/msgAllGenres"
+                android:text="@string/msg_all_genres"
                 android:textSize="@dimen/sizeTextHeader"
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
                 <android.support.v7.widget.CardView
                     android:layout_width="wrap_content"
@@ -45,6 +46,9 @@
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rcyShowGenres"
+                        adapter="@{viewModel.adapter}"
+                        app:layoutManager="GridLayoutManager"
+                        app:spanCount="2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </android.support.v7.widget.CardView>

@@ -2,7 +2,6 @@ package com.example.hcm_102_0006.android_project_m.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 
