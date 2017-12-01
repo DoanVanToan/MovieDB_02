@@ -1,21 +1,15 @@
 package com.example.hcm_102_0006.android_project_m.view.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
-import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemCompanyBinding;
 import com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel;
-
 
 import java.util.List;
 
@@ -76,6 +70,5 @@ public class AdapterShowCompany extends RecyclerView.Adapter<AdapterShowCompany.
             mItemCompanyBinding.setViewModel(mMovieDetailViewModel);
             mItemCompanyBinding.executePendingBindings();
         }
-
     }
 }

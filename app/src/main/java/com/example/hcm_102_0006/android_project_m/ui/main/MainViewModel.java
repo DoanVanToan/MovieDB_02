@@ -8,6 +8,7 @@ import android.databinding.Bindable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.CreditsResponse;
@@ -75,7 +76,9 @@ public class MainViewModel extends BaseObservable {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-
+                        Toast.makeText(mContext,
+                                mContext.getString(R.string.msg_connection_network),
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
         mCompositeSubscription.add(subscription);
@@ -95,6 +98,9 @@ public class MainViewModel extends BaseObservable {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        Toast.makeText(mContext,
+                                mContext.getString(R.string.msg_connection_network),
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
         mCompositeSubscription.add(subscription);

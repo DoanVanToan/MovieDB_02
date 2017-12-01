@@ -7,6 +7,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.widget.Toast;
 
+import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.GenreResponse;
 import com.example.hcm_102_0006.android_project_m.data.model.Genres;
 import com.example.hcm_102_0006.android_project_m.data.source.GenreRepository;
@@ -49,7 +50,9 @@ public class GenresViewModel extends BaseObservable {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Toast.makeText(mContext, "" + throwable.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext,
+                                mContext.getString(R.string.msg_connection_network),
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
         mCompositeSubscription.add(subscription);

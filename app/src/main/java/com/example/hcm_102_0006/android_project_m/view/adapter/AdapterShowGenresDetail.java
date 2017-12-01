@@ -1,12 +1,9 @@
 package com.example.hcm_102_0006.android_project_m.view.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hcm_102_0006.android_project_m.R;
@@ -74,6 +71,5 @@ public class AdapterShowGenresDetail extends RecyclerView.Adapter<AdapterShowGen
             mItemGenresBinding.setItemView(mMovieDetailViewModel);
             mItemGenresBinding.executePendingBindings();
         }
-
     }
 }
