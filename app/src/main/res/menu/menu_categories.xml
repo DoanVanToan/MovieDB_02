@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/menu_categories"
+        android:title="@string/menu_categories">
+        <menu>
+            <item
+                android:id="@+id/menu_Popular"
+                android:title="@string/menu_popular" />
+            <item
+                android:id="@+id/menu_NowPlaying"
+                android:title="@string/menu_nowPlaying" />
+            <item
+                android:id="@+id/menu_Upcoming"
+                android:title="@string/menu_upcoming" />
+            <item
+                android:id="@+id/menu_TopRate"
+                android:title="@string/menu_topRate" />
+            <item
+                android:id="@+id/menu_Genres"
+                android:title="@string/menu_genres" />
+            <item
+                android:id="@+id/menu_Favorite"
+                android:title="@string/menu_favorite" />
+        </menu>
+
+    </item>
+
+</menu>
