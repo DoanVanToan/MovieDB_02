@@ -137,7 +137,7 @@ public class MovieDetail extends BaseObservable implements Parcelable {
         parcel.writeString(mOriginalTitle);
     }
 
-    public class Company implements Parcelable{
+    public static class Company implements Parcelable{
         private int id;
         private String name;
 
@@ -146,7 +146,7 @@ public class MovieDetail extends BaseObservable implements Parcelable {
             name = in.readString();
         }
 
-        public final Creator<Company> CREATOR = new Creator<Company>() {
+        public static final Creator<Company> CREATOR = new Creator<Company>() {
             @Override
             public Company createFromParcel(Parcel in) {
                 return new Company(in);

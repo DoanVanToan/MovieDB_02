@@ -4,6 +4,7 @@ import com.example.hcm_102_0006.android_project_m.data.model.GenreResponse;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
+
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -36,12 +37,14 @@ public interface MovieApi {
             @Query("api_key") String apiKey,
             @Query("append_to_response") String videos);
 
-    @GET("/movie/{movie_id}/videos")
-    Observable<MovieDetail> getMovieVideo(@Path("movie_id") String movieId,@Query("api_key") String apiKey);
-
     @GET("/company/{company_id}/movies")
-    Observable<Movie> getMovieCompany(
+    Observable<ResultResponse> getMovieCompany(
             @Path("company_id") String companyId,
             @Query("api_key") String apiKey,
             @Query("language") String language);
+
+    @GET("/discover/movie")
+    Observable<ResultResponse> getMovieActor(
+            @Query("api_key") String apiKey,
+            @Query("with_cast") String withCast);
 }

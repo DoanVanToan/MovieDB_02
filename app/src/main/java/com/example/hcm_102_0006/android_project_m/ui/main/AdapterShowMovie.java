@@ -36,7 +36,8 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
     }
 
     public void addData(List<Movie> movies) {
-        if (movies == null) {
+        if (movies != null) {
+            mMovies.clear();
             mMovies.addAll(movies);
             notifyDataSetChanged();
         }
@@ -49,7 +50,8 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemMovieBinding movieBinding =
-                DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_movie, parent, false);
+                DataBindingUtil.inflate(LayoutInflater.from(
+                        parent.getContext()), R.layout.item_movie, parent, false);
         return new MyViewHolder(movieBinding);
     }
 
@@ -64,7 +66,6 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<Movie> mMovie = new ObservableField<>();
 
         public ItemMovieBinding mItemMovieBinding;
 
@@ -74,14 +75,9 @@ public class AdapterShowMovie extends RecyclerView.Adapter<AdapterShowMovie.MyVi
         }
 
         public void setBinding(Movie movie) {
-            if (mItemMovieBinding.getItemView() == null) mItemMovieBinding.setItemView(this);
-            mMovie.set(movie);
-        }
-
-        public void onClickMovieDetail(View view) {
-            /*Intent intent = new Intent(mContext, MovieDetailActivity.class);
-            intent.putExtra(BUNDLE_MOVIE, mMovies.get(getAdapterPosition()));
-            ((Activity) mContext).startActivityForResult(intent, KEY_DETAIL);*/
+            mItemMovieBinding.setMovie(movie);
+            mItemMovieBinding.setViewModel(mMainViewModel);
+            mItemMovieBinding.executePendingBindings();
         }
     }
 }

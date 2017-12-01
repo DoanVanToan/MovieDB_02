@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.databinding.ItemCreditsBinding;
 import com.example.hcm_102_0006.android_project_m.data.model.CreditsResponse;
+import com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel;
 
 import java.util.List;
 
@@ -25,9 +26,22 @@ public class AdapterShowCreditDetail extends RecyclerView.Adapter<AdapterShowCre
     private Context mContext;
     public static final String BUNDLE_CREDIT_DETAIL = "BUNDLE_CREDIT_DETAIL";
     public static final int KEY_CREDIT_DETAIL = 456;
+    public MovieDetailViewModel mMovieDetailViewModel;
     public AdapterShowCreditDetail(Context context, List<CreditsResponse.Credit> credits) {
         this.mCredits = credits;
         this.mContext = context;
+    }
+
+    public void addData(List<CreditsResponse.Credit> credits) {
+        if (credits != null) {
+            mCredits.clear();
+            mCredits.addAll(credits);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setMovieDetailViewModel(MovieDetailViewModel movieDetailViewModel) {
+        mMovieDetailViewModel = movieDetailViewModel;
     }
 
     @Override
@@ -48,7 +62,6 @@ public class AdapterShowCreditDetail extends RecyclerView.Adapter<AdapterShowCre
     }
 
     public class CreditViewHolder extends RecyclerView.ViewHolder {
-        public ObservableField<CreditsResponse.Credit> mCredit = new ObservableField<>();
         public ItemCreditsBinding mItemCreditsBinding;
 
         public CreditViewHolder(ItemCreditsBinding itemCreditsBinding) {
@@ -57,16 +70,9 @@ public class AdapterShowCreditDetail extends RecyclerView.Adapter<AdapterShowCre
         }
 
         public void binding(CreditsResponse.Credit credit) {
-            if (mItemCreditsBinding.getItemView() == null)
-                mItemCreditsBinding.setItemView(this);
-            mCredit.set(credit);
-        }
-
-        public void onResultCredit(View view) {
-            Intent intent = new Intent();
-            intent.putExtra(BUNDLE_CREDIT_DETAIL, mCredits.get(getAdapterPosition()));
-            ((Activity) mContext).setResult(KEY_CREDIT_DETAIL, intent);
-            ((Activity) mContext).finish();
+            mItemCreditsBinding.setCredit(credit);
+            mItemCreditsBinding.setViewModel(mMovieDetailViewModel);
+            mItemCreditsBinding.executePendingBindings();
         }
     }
 }

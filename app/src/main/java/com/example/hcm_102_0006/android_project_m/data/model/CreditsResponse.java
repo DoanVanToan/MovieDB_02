@@ -51,7 +51,7 @@ public class CreditsResponse implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
     }
 
-    public class Credit implements Parcelable{
+    public static class Credit implements Parcelable{
         @SerializedName("cast_id")
         private int mCastId;
         @SerializedName("character")
@@ -74,7 +74,7 @@ public class CreditsResponse implements Parcelable {
             mName = in.readString();
         }
 
-        public final Creator<Credit> CREATOR = new Creator<Credit>() {
+        public static final Creator<Credit> CREATOR = new Creator<Credit>() {
             @Override
             public Credit createFromParcel(Parcel in) {
                 return new Credit(in);
