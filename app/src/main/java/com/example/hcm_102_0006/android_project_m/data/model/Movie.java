@@ -2,6 +2,7 @@ package com.example.hcm_102_0006.android_project_m.data.model;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.databinding.BaseObservable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by hcm-102-0006 on 21/11/2017.
  */
-public class Movie implements Parcelable {
+public class Movie extends BaseObservable implements Parcelable {
     @SerializedName("id")
     private String mId;
     @SerializedName("vote_average")
@@ -27,11 +28,11 @@ public class Movie implements Parcelable {
     }
 
     public Movie(Cursor cursor) {
-        mId = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_MOVIEID));
+        mId = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_MOVIE_ID));
         mVoteAverage = cursor.getFloat(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE));
         mTitle = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_TITLE));
-        mOverview = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUM_OVERVIEW));
-        mPosterPath = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUM_POTER_PATH));
+        mOverview = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_OVERVIEW));
+        mPosterPath = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_POSTER_PATH));
     }
 
     protected Movie(Parcel in) {
@@ -57,7 +58,7 @@ public class Movie implements Parcelable {
     public ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
         if (mId != null) {
-            contentValues.put(MovieTable.MovieEntry.COLUMN_MOVIEID, mId);
+            contentValues.put(MovieTable.MovieEntry.COLUMN_MOVIE_ID, mId);
         }
         if (mVoteAverage != 0) {
             contentValues.put(MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE, mVoteAverage);
@@ -66,12 +67,26 @@ public class Movie implements Parcelable {
             contentValues.put(MovieTable.MovieEntry.COLUMN_TITLE, mTitle);
         }
         if (mOverview != null) {
-            contentValues.put(MovieTable.MovieEntry.COLUM_OVERVIEW, mOverview);
+            contentValues.put(MovieTable.MovieEntry.COLUMN_OVERVIEW, mOverview);
         }
         if (mPosterPath != null) {
-            contentValues.put(MovieTable.MovieEntry.COLUM_POTER_PATH, mPosterPath);
+            contentValues.put(MovieTable.MovieEntry.COLUMN_POSTER_PATH, mPosterPath);
         }
         return contentValues;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(mId);
+        parcel.writeFloat(mVoteAverage);
+        parcel.writeString(mTitle);
+        parcel.writeString(mOverview);
+        parcel.writeString(mPosterPath);
     }
 
     public String getId() {
@@ -82,12 +97,12 @@ public class Movie implements Parcelable {
         this.mId = id;
     }
 
-    public float getVote_average() {
+    public float getVoteAverage() {
         return mVoteAverage;
     }
 
-    public void setVote_average(float vote_average) {
-        this.mVoteAverage = vote_average;
+    public void setVoteAverage(float voteAverage) {
+        this.mVoteAverage = voteAverage;
     }
 
     public String getTitle() {
@@ -106,25 +121,11 @@ public class Movie implements Parcelable {
         this.mOverview = overview;
     }
 
-    public String getPoster_path() {
+    public String getPosterPath() {
         return mPosterPath;
     }
 
-    public void setPoster_path(String poster_path) {
-        this.mPosterPath = poster_path;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(mId);
-        parcel.writeFloat(mVoteAverage);
-        parcel.writeString(mTitle);
-        parcel.writeString(mOverview);
-        parcel.writeString(mPosterPath);
+    public void setPosterPath(String posterPath) {
+        this.mPosterPath = posterPath;
     }
 }
