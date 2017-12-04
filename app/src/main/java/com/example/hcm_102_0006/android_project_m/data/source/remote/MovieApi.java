@@ -16,9 +16,11 @@ import rx.Observable;
 
 public interface MovieApi {
     String SERVICE_URL = "https://api.themoviedb.org/3";
+    String IMAGE_URL = "http://image.tmdb.org/t/p/w185";
 
     @GET("/movie/{category}")
-    Observable<ResultResponse> getMovie(@Path("category") String category, @Query("api_key") String apiKey);
+    Observable<ResultResponse> getMovie(@Path("category") String category,
+                                        @Query("api_key") String apiKey);
 
     @GET("/genre/movie/list")
     Observable<GenreResponse> getGenres(@Query("api_key") String apiKey);

@@ -18,10 +18,10 @@ import java.util.List;
  */
 
 public class AdapterShowCompany extends RecyclerView.Adapter<AdapterShowCompany.CompanyViewHolder> {
+    public static final int KEY_COMPANY_DETAIL = 3;
+    public static final String BUNDLE_COMPANY = "BUNDLE_COMPANY";
     private List<MovieDetail.Company> mCompanies;
     private Context mContext;
-    public static final String BUNDLE_COMPANY = "BUNDLE_COMPANY";
-    public static final int KEY_COMPANY_DETAIL = 789;
     private MovieDetailViewModel mMovieDetailViewModel;
 
     public AdapterShowCompany(Context context, List<MovieDetail.Company> companies) {

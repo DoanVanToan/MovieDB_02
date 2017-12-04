@@ -17,7 +17,7 @@
                 android:title="@string/action_upcoming" />
             <item
                 android:id="@+id/menu_TopRate"
-                android:title="@string/action_topRate" />
+                android:title="@string/action_top_Rate" />
             <item
                 android:id="@+id/menu_Genres"
                 android:title="@string/action_genres" />

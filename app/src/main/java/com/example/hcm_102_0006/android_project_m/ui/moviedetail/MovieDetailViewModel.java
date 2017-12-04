@@ -17,6 +17,7 @@ import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.data.source.MovieRepository;
 import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLocalDataSource;
+import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.databinding.ActivityMovieDetailBinding;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCompany;
 import com.example.hcm_102_0006.android_project_m.view.adapter.AdapterShowCreditDetail;
@@ -75,25 +76,12 @@ public class MovieDetailViewModel extends BaseObservable implements YouTubePlaye
                     @Override
                     public void call(MovieDetail movieDetail) {
                         mMovieDetail = movieDetail;
+                        String url = movieDetail.getPosterPath();
+                        mMovieDetail.setPosterPath(MovieApi.IMAGE_URL + url);
                         mAdapterShowCompany.addData(movieDetail.getProductionPompanies());
                         mAdapterShowCreditDetail.addData(movieDetail.getmCredits().getmCast());
                         mAdapterShowGenresDetail.addData(movieDetail.getmGenres());
                         mActivityMovieDetailBinding.setMovieDetailBinding(mMovieDetail);
-                        mFavoriteLocalDataSource.isFavoriteMovie(movieId).subscribe(new Action1<Boolean>() {
-                            @Override
-                            public void call(Boolean aBoolean) {
-                                if (aBoolean) {
-                                    mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(true);
-                                } else {
-                                    mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(false);
-                                }
-                            }
-                        }, new Action1<Throwable>() {
-                            @Override
-                            public void call(Throwable throwable) {
-                                Toast.makeText(mContext, mContext.getResources().getString(R.string.msg_connection_network), Toast.LENGTH_SHORT).show();
-                            }
-                        });
                         mActivityMovieDetailBinding.youTubeShowVideo.initialize(
                                 BuildConfig.YOUTUBE_KEY, MovieDetailViewModel.this);
 
@@ -111,31 +99,48 @@ public class MovieDetailViewModel extends BaseObservable implements YouTubePlaye
         return mMovie;
     }
 
-
-    public void saveOrDeleteMovieFavorite() {
-        boolean isFavorite = mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.isFavorite();
-        if (isFavorite) {
-            mFavoriteLocalDataSource.deleteMovie(mMovie).subscribe(new Action1<Boolean>() {
-                @Override
-                public void call(Boolean aBoolean) {
-                    if (aBoolean) {
-                        mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(false);
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.msg_delete_movie), Toast.LENGTH_SHORT).show();
-                    }
+    public void saveMovieFavorite(View view) {
+        String url = mMovie.getPosterPath().replace(MovieApi.IMAGE_URL,"");
+        mMovie.setPosterPath(url);
+        mFavoriteLocalDataSource.insertMovie(mMovie).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                if (aBoolean) {
+                    mActivityMovieDetailBinding.buttonFavorite.setFavorite(true);
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.msg_save_movie), Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
+    }
 
-        } else {
-            mFavoriteLocalDataSource.insertMovie(mMovie).subscribe(new Action1<Boolean>() {
-                @Override
-                public void call(Boolean aBoolean) {
-                    if (aBoolean) {
-                        mActivityMovieDetailBinding.btnSaveOrDeleteFavorite.setFavorite(true);
-                        Toast.makeText(mContext, mContext.getResources().getString(R.string.msg_save_movie), Toast.LENGTH_SHORT).show();
-                    }
+    public void deleteMovieFavorite(View view) {
+        String url = mMovie.getPosterPath().replace(MovieApi.IMAGE_URL,"");
+        mMovie.setPosterPath(url);
+        mFavoriteLocalDataSource.deleteMovie(mMovie).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean aBoolean) {
+                if (aBoolean) {
+                    mActivityMovieDetailBinding.buttonFavorite.setFavorite(false);
+                    Toast.makeText(mContext, mContext.getResources().getString(R.string.msg_delete_movie), Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
+            }
+        });
+    }
+
+    public boolean isFavorite(int movieId) {
+        final boolean[] isMovieFavorite = {false};
+        mFavoriteLocalDataSource.isFavoriteMovie(String.valueOf(movieId)).subscribe(new Action1<Boolean>() {
+            @Override
+            public void call(Boolean isFavorite) {
+                isMovieFavorite[0] = isFavorite;
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Toast.makeText(mContext, mContext.getResources().getString(R.string.msg_connection_network), Toast.LENGTH_SHORT).show();
+            }
+        });
+        return isMovieFavorite[0];
     }
 
     @Bindable
@@ -152,8 +157,8 @@ public class MovieDetailViewModel extends BaseObservable implements YouTubePlaye
     }
 
     @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-        if (!b) {
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean isSuccessfully) {
+        if (!isSuccessfully) {
             youTubePlayer.loadVideo(mMovieDetail.getmVideos().getmResults().get(0).getmKey());
         }
     }
@@ -162,13 +167,10 @@ public class MovieDetailViewModel extends BaseObservable implements YouTubePlaye
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         if (youTubeInitializationResult.isUserRecoverableError()) {
             youTubeInitializationResult.getErrorDialog((Activity) mContext, 1).show();
-        } else {
-            String errorMessage = String.format("ABC", youTubeInitializationResult.toString());
-            Toast.makeText(mContext, errorMessage, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void handlerActivityResult(int requestCode, int resultCode, Intent data) {
+    public void handlerActivityResult(final int requestCode) {
         if (requestCode == 1) {
             mActivityMovieDetailBinding.youTubeShowVideo.initialize(BuildConfig.YOUTUBE_KEY, this);
         }
@@ -194,4 +196,5 @@ public class MovieDetailViewModel extends BaseObservable implements YouTubePlaye
         ((Activity) mContext).setResult(AdapterShowCreditDetail.KEY_CREDIT_DETAIL, intent);
         ((Activity) mContext).finish();
     }
+
 }

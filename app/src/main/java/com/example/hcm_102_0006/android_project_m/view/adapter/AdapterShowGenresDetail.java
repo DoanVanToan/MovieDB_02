@@ -18,10 +18,10 @@ import java.util.List;
  */
 
 public class AdapterShowGenresDetail extends RecyclerView.Adapter<AdapterShowGenresDetail.GenresViewHolder> {
-    private List<Genres> mGenres;
-    private Context mContext;
     public static final String BUNDLE_GENRES_DETAIL = "BUNDLE_GENRES_DETAIL";
     public static final int KEY_GENRES_DETAIL = 123;
+    private List<Genres> mGenres;
+    private Context mContext;
     public MovieDetailViewModel mMovieDetailViewModel;
 
     public AdapterShowGenresDetail(Context context, List<Genres> genres) {

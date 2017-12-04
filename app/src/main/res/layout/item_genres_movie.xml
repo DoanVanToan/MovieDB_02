@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{() -> viewModel.onItemGenreClicked(genre)}"
-            android:padding="@dimen/marginBetween2Item"
+            android:padding="@dimen/margin_between_Item"
             android:text="@{genre.name}"
             android:textSize="@dimen/size_header" />
 

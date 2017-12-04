@@ -18,6 +18,7 @@ import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
 import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
 import com.example.hcm_102_0006.android_project_m.data.source.MovieRepository;
 import com.example.hcm_102_0006.android_project_m.data.source.local.FavoriteLocalDataSource;
+import com.example.hcm_102_0006.android_project_m.data.source.remote.MovieApi;
 import com.example.hcm_102_0006.android_project_m.ui.genre.AdapterGenres;
 import com.example.hcm_102_0006.android_project_m.ui.genre.GenresActivity;
 import com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailActivity;

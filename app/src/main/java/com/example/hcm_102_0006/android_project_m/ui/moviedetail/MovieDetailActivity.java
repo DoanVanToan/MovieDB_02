@@ -1,10 +1,8 @@
 package com.example.hcm_102_0006.android_project_m.ui.moviedetail;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.hcm_102_0006.android_project_m.R;
 import com.example.hcm_102_0006.android_project_m.data.model.Movie;
@@ -40,7 +38,6 @@ public class MovieDetailActivity extends YouTubeBaseActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mMovieDetailViewModel.handlerActivityResult(requestCode, resultCode, data);
+        mMovieDetailViewModel.handlerActivityResult(requestCode);
     }
-
 }

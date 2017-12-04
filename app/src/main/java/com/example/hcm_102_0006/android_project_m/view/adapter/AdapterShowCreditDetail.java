@@ -18,11 +18,12 @@ import java.util.List;
  */
 
 public class AdapterShowCreditDetail extends RecyclerView.Adapter<AdapterShowCreditDetail.CreditViewHolder> {
-    private List<CreditsResponse.Credit> mCredits;
-    private Context mContext;
     public static final String BUNDLE_CREDIT_DETAIL = "BUNDLE_CREDIT_DETAIL";
     public static final int KEY_CREDIT_DETAIL = 456;
+    private List<CreditsResponse.Credit> mCredits;
+    private Context mContext;
     public MovieDetailViewModel mMovieDetailViewModel;
+
     public AdapterShowCreditDetail(Context context, List<CreditsResponse.Credit> credits) {
         this.mCredits = credits;
         this.mContext = context;

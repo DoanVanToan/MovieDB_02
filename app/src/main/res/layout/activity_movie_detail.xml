@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{movieDetailBinding.getOriginalTitle}"
-                android:textSize="@dimen/sizeTextHeader"
+                android:textSize="@dimen/size_text_header"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -53,12 +53,17 @@
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(movieDetailBinding.voteAverage)}" />
 
+                <!--
+                android:onClick="@{()->viewModel.saveOrDeleteMovieFavorite()}"
+                viewModel::deleteMovieFavorite:viewModel::saveMovieFavorite
+                -->
                 <com.github.ivbaranov.mfb.MaterialFavoriteButton
-                    android:id="@+id/btn_SaveOrDeleteFavorite"
+                    android:id="@+id/button_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->viewModel.saveOrDeleteMovieFavorite()}"
                     android:shadowColor="#6986fa"
+                    android:onClick="@{viewModel.isFavorite(movieDetailBinding.getId) ? viewModel.deleteMovieFavorite:viewModel.saveMovieFavorite}"
+                    app:favorite="@{viewModel.isFavorite(movieDetailBinding.getId)}"
                     app:mfb_color="black"
                     app:mfb_type="heart" />
             </LinearLayout>
@@ -73,7 +78,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:layout_marginRight="@dimen/size_text_header2"
                     android:text="@string/title_production" />
 
                 <android.support.v7.widget.RecyclerView
@@ -95,7 +100,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:layout_marginRight="@dimen/size_text_header2"
                     android:text="@string/title_genres" />
 
                 <android.support.v7.widget.RecyclerView
@@ -117,7 +122,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/sizeTextHeader2"
+                    android:layout_marginRight="@dimen/size_text_header2"
                     android:text="@string/title_credit" />
 
                 <android.support.v7.widget.RecyclerView
@@ -138,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title_trailer"
-                android:textSize="@dimen/sizeTextHeader"
+                android:textSize="@dimen/size_text_header"
                 android:textStyle="bold" />
 
             <com.google.android.youtube.player.YouTubePlayerView

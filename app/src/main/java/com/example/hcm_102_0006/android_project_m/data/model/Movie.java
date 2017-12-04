@@ -29,10 +29,12 @@ public class Movie extends BaseObservable implements Parcelable {
 
     public Movie(Cursor cursor) {
         mId = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_MOVIE_ID));
-        mVoteAverage = cursor.getFloat(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE));
+        mVoteAverage = cursor
+                .getFloat(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_VOTE_AVERAGE));
         mTitle = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_TITLE));
         mOverview = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_OVERVIEW));
-        mPosterPath = cursor.getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_POSTER_PATH));
+        mPosterPath = cursor
+                .getString(cursor.getColumnIndex(MovieTable.MovieEntry.COLUMN_POSTER_PATH));
     }
 
     protected Movie(Parcel in) {

@@ -7,7 +7,7 @@
     <string name="action_popular">Popular</string>
     <string name="action_now_playing">Now Playing</string>
     <string name="action_upcoming">Upcoming</string>
-    <string name="action_topRate">Top Rate</string>
+    <string name="action_top_Rate">Top Rate</string>
     <string name="action_genres">Genres</string>
     <string name="action_favorite">Favorite</string>
     <string name="search">Search...</string>
@@ -20,4 +20,5 @@
     <string name="title_production">Production : </string>
     <string name="title_genres">Genres : </string>
     <string name="title_credit">Credit : </string>
+    <string name="error_youtube">Error</string>
 </resources>
