@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="genre"
+            type="com.example.hcm_102_0006.android_project_m.data.model.Genres" />
+        <variable
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel"/>
+    </data>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onItemGenreClicked(genre)}"
+            android:padding="@dimen/margin_between_Item"
+            android:text="@{genre.name}"
+            android:textSize="@dimen/size_header" />
+
+</layout>

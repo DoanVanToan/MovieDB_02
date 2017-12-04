@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="sizeTextHeader">20dp</dimen>
-    <dimen name="sizeTextHeader2">15dp</dimen>
-    <dimen name="marginBottomHorizontalScrollView">10dp</dimen>
-    <dimen name="marginBetween2Item">5dp</dimen>
+    <dimen name="size_text_header">15sp</dimen>
+    <dimen name="size_text_header2">10sp</dimen>
+    <dimen name="margin_bottom_horizontal_scrollView">5sp</dimen>
+    <dimen name="margin_between_Item">5sp</dimen>
+    <dimen name="size_header">20sp</dimen>
+    <dimen name="size_height">30sp</dimen>
 </resources>

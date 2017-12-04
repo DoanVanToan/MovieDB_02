@@ -1,11 +1,13 @@
 package com.example.hcm_102_0006.android_project_m.data.source.remote;
 
 import com.example.hcm_102_0006.android_project_m.data.model.GenreResponse;
+import com.example.hcm_102_0006.android_project_m.data.model.Movie;
 import com.example.hcm_102_0006.android_project_m.data.model.MovieDetail;
-import com.example.hcm_102_0006.android_project_m.data.model.Result;
+import com.example.hcm_102_0006.android_project_m.data.model.ResultResponse;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import rx.Observable;
 
 /**
@@ -14,28 +16,37 @@ import rx.Observable;
 
 public interface MovieApi {
     String SERVICE_URL = "https://api.themoviedb.org/3";
-    String KEY_API = "c733ac6aba3d86364a56d1145bc1d1f9";
+    String IMAGE_URL = "http://image.tmdb.org/t/p/w185";
 
-    //Get information Category: https://api.themoviedb.org/3/movie/upcoming?api_key=c733ac6aba3d86364a56d1145bc1d1f9
-    @GET("/movie/{category}?api_key=c733ac6aba3d86364a56d1145bc1d1f9")
-    Observable<Result> getMovie (@Path("category") String category);
+    @GET("/movie/{category}")
+    Observable<ResultResponse> getMovie(@Path("category") String category,
+                                        @Query("api_key") String apiKey);
 
-    //https://api.themoviedb.org/3/genre/movie/list?api_key=c733ac6aba3d86364a56d1145bc1d1f9&language=en-US
-    @GET("/genre/movie/list?api_key=" + KEY_API)
-    Observable<GenreResponse> getGenres ();
+    @GET("/genre/movie/list")
+    Observable<GenreResponse> getGenres(@Query("api_key") String apiKey);
 
-    // get Movie Genres
-    @GET("/genre/{genre_id}/movies?api_key=" + KEY_API +"&language=en-US&include_adult=false&sort_by=created_at.asc")
-    Observable<Result> getMovieGenres (@Path("genre_id") String genreId);
+    @GET("/genre/{genre_id}/movies")
+    Observable<ResultResponse> getMovieGenres(
+            @Path("genre_id") String genreId,
+            @Query("api_key") String apiKey,
+            @Query("language") String language,
+            @Query("include_adult") boolean includeAdult,
+            @Query("sort_by") String sortBy);
 
-    // get Movie Detail /movie/{movie_id}
-    @GET("/movie/{movie_id}?api_key=" + KEY_API)
-    Observable<MovieDetail> getMovieDetail(@Path("movie_id") String movieId);
+    @GET("/movie/{movie_id}")
+    Observable<MovieDetail> getMovieDetail(
+            @Path("movie_id") String movieId,
+            @Query("api_key") String apiKey,
+            @Query("append_to_response") String videos);
 
-    // Get Videos
-    //get /movie/{movie_id}/videos
-    @GET("/movie/{movie_id}/videos?api_key=" + KEY_API)
-    Observable<MovieDetail> getMovieVideo(@Path("movie_id") String movieId);
-    ///
+    @GET("/company/{company_id}/movies")
+    Observable<ResultResponse> getMovieCompany(
+            @Path("company_id") String companyId,
+            @Query("api_key") String apiKey,
+            @Query("language") String language);
 
+    @GET("/discover/movie")
+    Observable<ResultResponse> getMovieActor(
+            @Query("api_key") String apiKey,
+            @Query("with_cast") String withCast);
 }

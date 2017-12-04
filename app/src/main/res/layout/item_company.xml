@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<layout>
     <data>
         <variable
-            name="genre"
-            type="com.example.hcm_102_0006.android_project_m.data.model.Genres" />
+            name="company"
+            type="com.example.hcm_102_0006.android_project_m.data.model.MovieDetail.Company"/>
         <variable
             name="viewModel"
-            type="com.example.hcm_102_0006.android_project_m.ui.genre.GenresViewModel" />
-
+            type="com.example.hcm_102_0006.android_project_m.ui.moviedetail.MovieDetailViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,19 +14,15 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/margin_between_Item">
-
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:onClick="@{()->viewModel.onItemGenreClicked(genre)}">
+            android:onClick="@{()->viewModel.onResultCompany(company)}">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/size_text_header"
-                android:text="@{genre.name}"/>
-
-
+                android:text="@{company.name}"/>
 
         </android.support.v7.widget.CardView>
     </LinearLayout>

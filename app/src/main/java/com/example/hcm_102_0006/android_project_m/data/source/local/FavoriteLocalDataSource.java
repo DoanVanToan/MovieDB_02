@@ -54,7 +54,7 @@ public class FavoriteLocalDataSource extends DatabaseHelper implements FavoriteD
             public void call(Subscriber<? super Boolean> subscriber) {
                 boolean isFavorite = false;
                 SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-                String selection = MovieTable.MovieEntry.COLUMN_MOVIEID + " =?";
+                String selection = MovieTable.MovieEntry.COLUMN_MOVIE_ID + " =?";
                 String[] selectionArgs = { String.valueOf(id) };
                 Cursor cursor =
                     sqLiteDatabase.query(MovieTable.MovieEntry.TABLE_NAME, null, selection,
@@ -103,7 +103,7 @@ public class FavoriteLocalDataSource extends DatabaseHelper implements FavoriteD
                     return;
                 }
                 SQLiteDatabase db = getWritableDatabase();
-                String whereClause = MovieTable.MovieEntry.COLUMN_MOVIEID + " =?";
+                String whereClause = MovieTable.MovieEntry.COLUMN_MOVIE_ID + " =?";
                 long result =
                     db.delete(MovieTable.MovieEntry.TABLE_NAME, whereClause, new String[] {
                         movie.getId()

@@ -3,17 +3,26 @@
 
     <data>
 
+        <import type="com.example.hcm_102_0006.android_project_m.utils.DataBindingUtils" />
+
+        <import type="android.view.View" />
+
         <variable
-            name="itemView"
-            type="com.example.hcm_102_0006.android_project_m.view.ui.main.AdapterShowMovie" />
+            name="movie"
+            type="com.example.hcm_102_0006.android_project_m.data.model.Movie" />
+        <variable
+            name="viewModel"
+            type="com.example.hcm_102_0006.android_project_m.ui.main.MainViewModel"/>
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->viewModel.onClickMovieDetail(movie)}"
         android:orientation="vertical"
-        android:padding="@dimen/marginBetween2Item"
-        android:onClick="@{itemView::onClickMovieDetail}">
+        android:padding="@dimen/margin_between_Item">
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,29 +30,29 @@
             app:cardCornerRadius="4dp">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:imageUrl="@{itemView.profileImage}"/>
+                    app:imageUrl="@{movie.getPosterPath}" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
-                    android:text="@{itemView.title}"
-                    android:textSize="@dimen/sizeTextHeader"
+                    android:text="@{movie.getTitle}"
+                    android:textSize="@dimen/size_text_header"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{itemView.voteAverage}"
+                    android:text="@{String.valueOf(movie.getVoteAverage)}"
                     android:textColor="@android:color/holo_red_dark"
-                    android:textSize="@dimen/sizeTextHeader2" />
+                    android:textSize="@dimen/size_text_header2" />
             </LinearLayout>
 
         </android.support.v7.widget.CardView>

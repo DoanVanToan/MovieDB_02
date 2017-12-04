@@ -1,16 +1,24 @@
 <resources>
     <string name="app_name">Movie</string>
     <string name="API_KEY">c733ac6aba3d86364a56d1145bc1d1f9</string>
+    <string name="API_KEY_YOUTUBE">AIzaSyADDdmasYNumHvYxldv28AX6gkw0Yg4wJM</string>
     <string name="API_TOKEN">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNzMzYWM2YWJhM2Q4NjM2NGE1NmQxMTQ1YmMxZDFmOSIsInN1YiI6IjVhMTI0MmMwOTI1MTQxMzhmMzA2MjYxOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.jmYZhEeH0lORx8_fwFAUyxOgus1DPB29H5d5zPM30sE</string>
     <string name="menu_categories">Categories</string>
-    <string name="menu_popular">Popular</string>
-    <string name="menu_nowPlaying">Now Playing</string>
-    <string name="menu_upcoming">Upcoming</string>
-    <string name="menu_topRate">Top Rate</string>
-    <string name="menu_genres">Genres</string>
-    <string name="menu_favorite">Favorite</string>
+    <string name="action_popular">Popular</string>
+    <string name="action_now_playing">Now Playing</string>
+    <string name="action_upcoming">Upcoming</string>
+    <string name="action_top_Rate">Top Rate</string>
+    <string name="action_genres">Genres</string>
+    <string name="action_favorite">Favorite</string>
     <string name="search">Search...</string>
-    <string name="btnFind">Find</string>
-    <string name="msgAllGenres">All Genres</string>
-
+    <string name="action_find">Find</string>
+    <string name="msg_all_genres">All Genres</string>
+    <string name="msg_save_movie">Your favorite movie has been saved</string>
+    <string name="msg_delete_movie">Your favorite movie has been deleted</string>
+    <string name="msg_connection_network">Please connect network to use App</string>
+    <string name="title_trailer">Trailer</string>
+    <string name="title_production">Production : </string>
+    <string name="title_genres">Genres : </string>
+    <string name="title_credit">Credit : </string>
+    <string name="error_youtube">Error</string>
 </resources>
